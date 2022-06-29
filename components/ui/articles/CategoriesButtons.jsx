@@ -1,4 +1,4 @@
-import { categoryNames } from "lib/constants/categoryNames";
+import { categoryNames } from "../../../lib/constants/categoryNames";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";

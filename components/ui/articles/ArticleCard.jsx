@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
 // import Anchor from "../../../ui/core/Anchor";
-import Link from "next/link";
+import {Link} from "react-router-dom";
 
 const formateDate = (value) => {
   let date = new Date(value);
@@ -14,14 +13,19 @@ const formateDate = (value) => {
 const ArticleCard = ({ title, date, imageUrl, content, tags, href = "#" }) => {
   const fDate = formateDate(date);
 
+
   return (
-    <Link href={href}>
+    <Link to={href}>
       <div className="h-auto mr-3 border rounded-xl shadow-lg overflow-hidden cursor-pointer scroll-smooth w-full flex-none">
         <div className="overflow-hidden flex items-center justify-center mt-2">
           <img
             src={imageUrl}
             alt="article"
             className="w-[95%] rounded-xl object-cover hover:scale-105 transition-all duration-300"
+            style={{
+              height:"200px",
+              objectFit: "cover"
+            }}
           />
         </div>
         <div className="p-2.5 flex flex-col justify-between">

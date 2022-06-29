@@ -34,6 +34,7 @@ import GraphQL from "./pages/test-gql";
 import { createClient, Provider } from "urql";
 import NavLayout from "./ui/layouts/NavLayout";
 import useNav from "../lib/hooks/useNav";
+import ArticlePageSlug from "./pages/articles/[slug]";
 
 // window.matchMedia("(prefers-color-scheme: dark)").addListener(async (status) => {
 //   try {
@@ -67,6 +68,11 @@ const AppShell = () => {
                 exact
                 path="/package/:id"
                 render={() => <PackageDetails />}
+              />
+              <Route
+                exact
+                path="/articles/:slug"
+                render={() => <ArticlePageSlug />}
               />
               <Route
                 exact

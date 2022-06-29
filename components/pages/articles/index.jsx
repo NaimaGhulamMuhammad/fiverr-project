@@ -1,12 +1,32 @@
-import React from "react";
-import ArticleCard from "../../ui/articles/ArticleCard";
-import { backend_api } from "../../../lib/constants/routes_constants";
-import { TopHeader } from "../../ui/layouts/Headers";
-import Container from "../../ui/layouts/Container";
 import { IonContent, IonPage } from "@ionic/react";
+import React, { useEffect, useState } from "react";
+import { backend_api } from "../../../lib/constants/routes_constants";
+import ArticleCard from "../../ui/articles/ArticleCard";
 import CategoriesMobile from "../../ui/articles/CategoriesMobile";
+import Container from "../../ui/layouts/Container";
+import { TopHeader } from "../../ui/layouts/Headers";
+
 
 const ArticlePage = () => {
+
+  const [articles, setArticles] = useState([]);
+  
+  useEffect(() => {
+    (async () => {
+
+      try {
+        const response = await fetch(`${backend_api}`);
+        const result = await response.json();
+        setArticles(result);
+      } catch (err) {
+        throw err;
+      }
+    })();
+    // eslint-disable-next-line
+  }, []);
+  
+
+  
   return (
     <IonPage>
         <TopHeader pageName={"Articles"} />
@@ -19,14 +39,14 @@ const ArticlePage = () => {
               All{" "}
             </h1>
             <div className="article-grid mb-12">
-              {Articles?.arr?.map((el, index) => (
+              {articles.map((el, index) => (
                 <ArticleCard
                   key={index}
                   title={el.title}
                   imageUrl={el.image}
                   content={el.summary}
                   date={el.datePublished}
-                  href={`/articles/${el?.articleRoute?.replace(".md", "")}`}
+                  href={`/articles/${el.articleRoute?.replace(".md", "")}`}
                   tags={el.tags}
                 />
               ))}
@@ -39,14 +59,14 @@ const ArticlePage = () => {
   );
 };
 
-export async function getStaticProps() {
-    let articles = [];
-  try {
-    const response = await fetch(`${backend_api}/api/articles`);
-    articles = await response.json();
-  } catch (err) {
-    throw err;
-  }
-  return { props: { articles } };
-}
+// export async function getStaticProps() {
+//     let articles = [];
+//   try {
+//     const response = await fetch(`${backend_api}/api/articles`);
+//     articles = await response.json();
+//   } catch (err) {
+//     throw err;
+//   }
+//   return { props: { articles } };
+// }
 export default ArticlePage;

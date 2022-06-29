@@ -2,7 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import matter from "gray-matter";
 
-const postsDirectory = join(process.cwd(), "articles");
+const postsDirectory = join(process.cwd(), "pages/api/articles");
 
 export function getArticleSlugs() {
   return fs.readdirSync(postsDirectory);
