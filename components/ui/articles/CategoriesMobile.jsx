@@ -31,7 +31,7 @@ const CategoriesMobile = ({ title }) => {
 
       <SubHeadingText classes={"py-1"}>Categories</SubHeadingText>
       <div className="grid grid-cols-4 gap-4">
-        {categoryNames.slice(0, 8).map((categoryNames, idx) => (
+        {categoryNames.slice(0, 4).map((categoryNames, idx) => (
           <ConsultCircle
             name={formatTitle(categoryNames.name)}
             icon={categoryNames.icon}
