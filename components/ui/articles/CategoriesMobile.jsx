@@ -1,20 +1,15 @@
-import React from "react";
-import { useState } from "react";
 import { IonGrid, IonRow } from "@ionic/react";
-import { SubHeadingText } from "../core/Text";
-import ConsultCircle from "../../ui/consultation/ConsultCircle";
+import React from "react";
 import AllSpecialitiesCirlceItems from "../../../components/ui/consultation/all-specialities/AllSpecialitiesCirlceItems";
-import CategoriesButtons from "./CategoriesButtons";
 import { categoryNames } from "../../../lib/constants/categoryNames";
-import { BsArrowRightCircle } from "react-icons/bs";
-import { BsArrowDownCircle } from "react-icons/bs";
-import { BottomSheetModal } from "../core/Modals";
-import useModal from "../../../lib/hooks/useModal";
-import { Button } from "../core/Buttons";
 import formatTitle from "../../../lib/hooks/formatTitle";
+import useModal from "../../../lib/hooks/useModal";
+import ConsultCircle from "../../ui/consultation/ConsultCircle";
+import { Button } from "../core/Buttons";
+import { BottomSheetModal } from "../core/Modals";
+import { SubHeadingText } from "../core/Text";
 
-const CategoriesMobile = ({ title }) => {
-  const [show, setShow] = useState(false);
+const CategoriesMobile = () => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
@@ -31,12 +26,12 @@ const CategoriesMobile = ({ title }) => {
 
       <SubHeadingText classes={"py-1"}>Categories</SubHeadingText>
       <div className="grid grid-cols-4 gap-4">
-        {categoryNames.slice(0, 4).map((categoryNames, idx) => (
+        {categoryNames.slice(0, 4).map((categoryName, idx) => (
           <ConsultCircle
-            name={formatTitle(categoryNames.name)}
-            icon={categoryNames.icon}
-            route={categoryNames?.route}
             key={idx}
+            name={formatTitle(categoryName.name)}
+            icon={categoryName.icon}
+            route={categoryName?.route}
           />
         ))}
       </div>
@@ -51,9 +46,9 @@ const CategoriesMobile = ({ title }) => {
       >
         <IonGrid fixed>
           <IonRow>
-            {categoryNames.map((s) => (
+            {categoryNames.map((s, index) => (
               <AllSpecialitiesCirlceItems
-                key={s.id}
+                key={index}
                 icon={s.icon}
                 name={formatTitle(s.name)}
                 route={`/articles/categories/${categoryNames.route}`}

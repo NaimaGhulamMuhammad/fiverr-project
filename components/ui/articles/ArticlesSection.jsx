@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import ArticleCard from "./ArticleCard";
-import { categoryNames } from "../../../lib/constants/categoryNames";
 import { backend_api } from "../../../lib/constants/routes_constants";
+import ArticleCard from "./ArticleCard";
 
 const ArticlesSection = ({ title }) => {
   const [articles, setArticles] = useState([]);

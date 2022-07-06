@@ -2,39 +2,40 @@ import {
   IonApp,
   IonRouterOutlet,
   IonSplitPane,
-  setupIonicReact,
+  setupIonicReact
 } from "@ionic/react";
 // import { StatusBar, Style } from '@capacitor/status-bar';
-
 import { IonReactRouter } from "@ionic/react-router";
-import { Redirect, Route } from "react-router-dom";
-import ArticlePage from "./pages/articles";
-import Consult from "./pages/consult";
-import Doctors from "./pages/doctors";
-import Packages from "./pages/packages";
-import Profile from "./pages/profile";
-import Home from "./pages/home";
-import PackageDetails from "./pages/package/PackageDetails";
-import Appointments from "./pages/appointments";
-import Consultations from "./pages/consulations/consultations";
-import LabResults from "./pages/lab-results";
-import MyPractitioners from "./pages/my-practitioners";
-import UserProfile from "./pages/user-profile";
+import { Route } from "react-router-dom";
+import { createClient, Provider } from "urql";
+import useNav from "../lib/hooks/useNav";
 import AppointmentPage from "./pages/appointment";
+import Appointments from "./pages/appointments";
+import ArticlePage from "./pages/articles";
+import CategoryName from "./pages/articles/categories/[categoryName]";
+
+import ArticlePageSlug from "./pages/articles/[slug]";
+import ChangePassword from "./pages/change-password";
+import Consultations from "./pages/consulations/consultations";
+import Consult from "./pages/consult";
 import ConsultationDetailsPage from "./pages/consultation";
-import ResultDetails from "./pages/lab-results/details";
 import Doctor from "./pages/doctor";
-import BookConsultation from "./pages/online-consultation/book-consultation";
-import LoginPage from "./pages/login";
+import Doctors from "./pages/doctors";
 import EmailSignUp from "./pages/email-sign-up";
 import ForgotPassword from "./pages/forgot-password";
-import ChangePassword from "./pages/change-password";
+import Home from "./pages/home";
+import LabResults from "./pages/lab-results";
+import ResultDetails from "./pages/lab-results/details";
+import LoginPage from "./pages/login";
+import MyPractitioners from "./pages/my-practitioners";
+import BookConsultation from "./pages/online-consultation/book-consultation";
+import PackageDetails from "./pages/package/PackageDetails";
+import Packages from "./pages/packages";
+import Profile from "./pages/profile";
 import Settings from "./pages/settings";
 import GraphQL from "./pages/test-gql";
-import { createClient, Provider } from "urql";
+import UserProfile from "./pages/user-profile";
 import NavLayout from "./ui/layouts/NavLayout";
-import useNav from "../lib/hooks/useNav";
-import ArticlePageSlug from "./pages/articles/[slug]";
 
 // window.matchMedia("(prefers-color-scheme: dark)").addListener(async (status) => {
 //   try {
@@ -69,11 +70,13 @@ const AppShell = () => {
                 path="/package/:id"
                 render={() => <PackageDetails />}
               />
+
               <Route
                 exact
                 path="/articles/:slug"
                 render={() => <ArticlePageSlug />}
               />
+
               <Route
                 exact
                 path="/appointments"
@@ -132,6 +135,11 @@ const AppShell = () => {
                 exact
                 path="/change-password"
                 render={() => <ChangePassword />}
+              />
+              <Route
+                exact
+                path="/articles/categories/:categoryName"
+                render={() => <CategoryName />}
               />
               <Route exact path="/settings" render={() => <Settings />} />
               <Route exact path="/test-gql" render={() => <GraphQL />} />
