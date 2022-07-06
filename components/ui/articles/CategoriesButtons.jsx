@@ -4,6 +4,8 @@ import React from "react";
 import Image from "next/image";
 
 const CategoriesButtons = ({ title }) => {
+
+  
   return (
     <div className="mt-4 whitespace-nowrap text-lg  flex flex-col md:gap-4 cursor-pointer">
       {categoryNames.map((category, index) => (
