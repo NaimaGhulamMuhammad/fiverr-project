@@ -21,10 +21,9 @@ const ArticlePage = () => {
     })();
   }, []);
 
-
   return (
     <IonPage>
-      <TopHeader pageName={"Articles"} />
+      <TopHeader pageName={"Articles"} back />
       <IonContent>
         <Container>
           <section className="md:flex mt-6 justify-between">

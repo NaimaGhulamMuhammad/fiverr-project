@@ -1,31 +1,18 @@
 import { IonGrid, IonRow } from "@ionic/react";
-import React from "react";
+import ConsultCircle from "../../ui/consultation/ConsultCircle";
 import AllSpecialitiesCirlceItems from "../../../components/ui/consultation/all-specialities/AllSpecialitiesCirlceItems";
 import { categoryNames } from "../../../lib/constants/categoryNames";
-import formatTitle from "../../../lib/hooks/formatTitle";
-import useModal from "../../../lib/hooks/useModal";
-import ConsultCircle from "../../ui/consultation/ConsultCircle";
-import { Button } from "../core/Buttons";
 import { BottomSheetModal } from "../core/Modals";
-import { SubHeadingText } from "../core/Text";
+import useModal from "../../../lib/hooks/useModal";
+import { Button } from "../core/Buttons";
+import formatTitle from "../../../lib/hooks/formatTitle";
 
-const CategoriesMobile = () => {
+const CategoriesMobile = ({ title }) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <div>
-      {/* <button
-        onClick={() => setShow(!show)}
-        className="inline-flex items-center justify-between border rounded px-6 py-1 bg-slate-300 text-xl"
-      >
-        CATEGORIES
-        <div className="inline-block w-5 h-5 ml-1">
-          {show ? <BsArrowDownCircle /> : <BsArrowRightCircle />}
-        </div>
-      </button> */}
-
-      <SubHeadingText classes={"py-1"}>Categories</SubHeadingText>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-4 gap-4 py-2">
         {categoryNames.slice(0, 4).map((categoryName, idx) => (
           <ConsultCircle
             key={idx}
@@ -35,7 +22,6 @@ const CategoriesMobile = () => {
           />
         ))}
       </div>
-
       <Button handleClick={openModal} full classes={"mt-1"}>
         See All Categories
       </Button>
@@ -46,12 +32,12 @@ const CategoriesMobile = () => {
       >
         <IonGrid fixed>
           <IonRow>
-            {categoryNames.map((s, index) => (
+            {categoryNames.map((s, idx) => (
               <AllSpecialitiesCirlceItems
-                key={index}
+                key={idx}
                 icon={s.icon}
                 name={formatTitle(s.name)}
-                route={`/articles/categories/${categoryNames.route}`}
+                route={s.route}
                 closeModal={closeModal}
               />
             ))}

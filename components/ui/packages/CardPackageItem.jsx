@@ -75,6 +75,7 @@ const CardPackageItem = ({ healthPackages }) => {
                 <Button
                   handleClick={() => console.log("View Package!")}
                   primary
+                  hover
                 >
                   View
                 </Button>

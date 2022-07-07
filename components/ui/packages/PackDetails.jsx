@@ -70,7 +70,7 @@ const PackDetails = ({
             If you are interested in booking this package, please contact us. We
             will get back to you shortly.
           </div>
-          <Button handleClick={() => console.log("Contact Us")}>
+          <Button handleClick={() => console.log("Contact Us")} hover>
             Contact Us
           </Button>
         </div>

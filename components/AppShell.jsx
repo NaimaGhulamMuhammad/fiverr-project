@@ -2,40 +2,43 @@ import {
   IonApp,
   IonRouterOutlet,
   IonSplitPane,
-  setupIonicReact
+  setupIonicReact,
 } from "@ionic/react";
 // import { StatusBar, Style } from '@capacitor/status-bar';
+
 import { IonReactRouter } from "@ionic/react-router";
 import { Route } from "react-router-dom";
-import { createClient, Provider } from "urql";
-import useNav from "../lib/hooks/useNav";
-import AppointmentPage from "./pages/appointment";
-import Appointments from "./pages/appointments";
-import ArticlePage from "./pages/articles";
-import CategoryName from "./pages/articles/categories/[categoryName]";
-
-import ArticlePageSlug from "./pages/articles/[slug]";
-import ChangePassword from "./pages/change-password";
-import Consultations from "./pages/consulations/consultations";
 import Consult from "./pages/consult";
-import ConsultationDetailsPage from "./pages/consultation";
-import Doctor from "./pages/doctor";
 import Doctors from "./pages/doctors";
-import EmailSignUp from "./pages/email-sign-up";
-import ForgotPassword from "./pages/forgot-password";
-import Home from "./pages/home";
-import LabResults from "./pages/lab-results";
-import ResultDetails from "./pages/lab-results/details";
-import LoginPage from "./pages/login";
-import MyPractitioners from "./pages/my-practitioners";
-import BookConsultation from "./pages/online-consultation/book-consultation";
-import PackageDetails from "./pages/package/PackageDetails";
 import Packages from "./pages/packages";
 import Profile from "./pages/profile";
-import Settings from "./pages/settings";
-import GraphQL from "./pages/test-gql";
+import Home from "./pages/home";
+import PackageDetails from "./pages/package/PackageDetails";
+import Appointments from "./pages/appointments";
+import Consultations from "./pages/consulations/consultations";
+import LabResults from "./pages/lab-results";
+import MyPractitioners from "./pages/my-practitioners";
 import UserProfile from "./pages/user-profile";
+import AppointmentPage from "./pages/appointment";
+import ConsultationDetailsPage from "./pages/consultation";
+import ResultDetails from "./pages/lab-results/details";
+import Doctor from "./pages/doctor";
+import BookConsultation from "./pages/online-consultation/book-consultation";
+import LoginPage from "./pages/login";
+import EmailSignUp from "./pages/email-sign-up";
+import ForgotPassword from "./pages/forgot-password";
+import ChangePassword from "./pages/change-password";
+import Settings from "./pages/settings";
+import Orders from "./pages/orders";
+import BookOfflineAppointment from "./pages/doctors/book-appointment/BookOfflineAppointment";
+import GraphQL from "./pages/test-gql";
+import { createClient, Provider } from "urql";
 import NavLayout from "./ui/layouts/NavLayout";
+import RescheduleAppointment from "./pages/appointment/reschedule/RescheduleAppointment";
+import ArticlePage from "./pages/articles";
+import CategoryName from "./pages/articles/categories";
+import ArticlePageSlug from "./pages/articles/slug";
+import OrderDetailsPage from "./pages/order/orderDetails";
 
 // window.matchMedia("(prefers-color-scheme: dark)").addListener(async (status) => {
 //   try {
@@ -52,31 +55,36 @@ const client = createClient({
 setupIonicReact();
 
 const AppShell = () => {
-  const { isShown, showNav } = useNav();
   return (
     <IonApp>
       <IonReactRouter>
-        {isShown ? <NavLayout /> : <></>}
+        <NavLayout />
         <Provider value={client}>
           <IonSplitPane contentId="main">
             <IonRouterOutlet id="main">
-              <Route exact path="/" render={() => <Home />} />
+              <Route exact path="/" render={() => <LoginPage />} />
+              <Route exact path="/home" render={() => <Home />} />
               <Route exact path="/consult" render={() => <Consult />} />
               <Route exact path="/packages" render={() => <Packages />} />
               <Route exact path="/doctors" render={() => <Doctors />} />
               <Route exact path="/profile" render={() => <Profile />} />
+              <Route exact path="/orders" render={() => <Orders />} />
               <Route
                 exact
                 path="/package/:id"
                 render={() => <PackageDetails />}
               />
-
+              <Route exact path="/articles" render={() => <ArticlePage />} />
               <Route
                 exact
                 path="/articles/:slug"
                 render={() => <ArticlePageSlug />}
               />
-
+              <Route
+                exact
+                path="/doctors/book-appointment/:id"
+                render={() => <BookOfflineAppointment />}
+              />
               <Route
                 exact
                 path="/appointments"
@@ -89,6 +97,11 @@ const AppShell = () => {
               />
               <Route
                 exact
+                path="/appointment/reschedule/:id"
+                render={() => <RescheduleAppointment />}
+              />
+              <Route
+                exact
                 path="/consultations"
                 render={() => <Consultations />}
               />
@@ -97,7 +110,6 @@ const AppShell = () => {
                 path="/consultation"
                 render={() => <ConsultationDetailsPage />}
               />
-              <Route exact path="/articles" render={() => <ArticlePage />} />
               <Route exact path="/lab-results" render={() => <LabResults />} />
               <Route
                 exact
@@ -120,7 +132,7 @@ const AppShell = () => {
                 path="/online-consultation/book-consultation"
                 render={() => <BookConsultation />}
               />
-              <Route exact path="/login" render={() => <LoginPage />} />
+
               <Route
                 exact
                 path="/email-sign-up"
@@ -138,10 +150,16 @@ const AppShell = () => {
               />
               <Route
                 exact
-                path="/articles/categories/:categoryName"
+                path="/articles/categories/:category"
                 render={() => <CategoryName />}
               />
               <Route exact path="/settings" render={() => <Settings />} />
+              <Route exact path="/orders" render={() => <Orders />} />
+              <Route
+                exact
+                path="/order/:id"
+                render={() => <OrderDetailsPage />}
+              />
               <Route exact path="/test-gql" render={() => <GraphQL />} />
             </IonRouterOutlet>
           </IonSplitPane>
