@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ArticleCard from "./homeComponents/ArticleCard";
+import ArticleCard from "../articles/ArticleCard";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
