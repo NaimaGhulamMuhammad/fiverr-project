@@ -19,13 +19,13 @@ const CategoryName = () => {
 
   useEffect(() => {
     (async () => {
-      const tags = categories[params.category];
+      const tags = categories[params.category] ?? [];
       const name =
         categoryNames.find((c) => c.route.endsWith(params.category))?.name ??
         "";
 
       setTitle(name);
-      if (!tags) return;
+
       try {
         const response = await fetch(
           `${backend_api}/categories/${params.category}`,
@@ -41,6 +41,8 @@ const CategoryName = () => {
       }
     })();
   }, []);
+
+
 
   return (
     <IonPage>

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 // import Anchor from "../../../ui/core/Anchor";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const formateDate = (value) => {
   let date = new Date(value);
@@ -16,7 +16,9 @@ const ArticleCard = ({ title, date, imageUrl, content, tags, href = "#" }) => {
 
   return (
     <Link to={href}>
-      <div className="h-auto mr-3 border rounded-xl shadow-lg overflow-hidden cursor-pointer scroll-smooth w-full flex-none">
+      <div className="h-auto mr-3 border rounded-xl shadow-lg overflow-hidden cursor-pointer scroll-smooth w-full flex flex-col"
+      style={{minWidth: 320, height: 420,}}
+      >
         <div className="overflow-hidden flex items-center justify-center mt-2">
           <img
             src={imageUrl}
@@ -28,11 +30,17 @@ const ArticleCard = ({ title, date, imageUrl, content, tags, href = "#" }) => {
             }}
           />
         </div>
-        <div className="p-2.5 flex flex-col justify-between">
-          <div className="font-general flex-1 text-sm">{fDate}</div>
-          <div className="font-title font-medium h-12">{title}</div>
-          <div className="excerpt">{content}</div>
-          <div className="flex w-full flex-wrap">
+        <div className="p-2.5 flex flex-col flex-1" >
+
+          <div className="flex-1">
+            <div className="font-general text-sm">{fDate}</div>
+            <div className="font-title font-medium h-14">{title}</div>
+
+            <div className="excerpt">{content}</div>
+          </div>
+
+
+          <div className="flex w-full flex-wrap" >
             {tags.slice(0, 3).map((el, index) => (
               <span
                 key={index}

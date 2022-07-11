@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ArticleCard from "../articles/ArticleCard";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
 import { backend_api } from "../../../lib/constants/routes_constants";
+import ArticleCard from "../articles/ArticleCard";
+
 
 const FeaturedArticles = () => {
   const [articles, setArticles] = useState([]);
@@ -25,7 +25,7 @@ const FeaturedArticles = () => {
       <div className="font-title text-sectionHead mb-2 py-2 px-4">
         Featured Articles
       </div>
-      <div className="flex w-full overflow-x-auto snap-x md:justify-between pb-4 pl-4">
+      <div className="flex w-full overflow-x-auto snap-x md:justify-between pb-4 pl-4 gap-3">
         {articles.map((el, index) => {
           if (index < 4)
             return (
