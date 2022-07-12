@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { PACKAGES } from "../../../lib/data";
+import { ITEMS } from "../../../lib/data";
 import Spotlight from "./homeComponents/Spotlight";
+
 const SpotlightSection = () => {
-  const [packages, setPackages] = useState(PACKAGES);
-  const [discountedPackages, setDiscountedPackages] = useState();
+  const [packages, setPackages] = useState(
+    ITEMS.filter((item) => item.type == "package")
+  );
+  const [discountedPackages, setDiscountedPackages] = useState([]);
 
   useEffect(() => {
     if (packages != undefined && packages.length > 0) {
-      const discPacks = packages.filter((pack) => {
-        return pack.discountedPrice != "";
+      const discPacks = packages.filter((pack, idx) => {
+        return idx < 2;
       });
+      console.log(discPacks);
       setDiscountedPackages(discPacks);
     }
   }, [packages]);
 
-  return (
+  return discountedPackages?.length > 0 ? (
     <div className="mb-4 py-4 font-general bg-tertiary-100">
       <div className="mb-2 py-2 px-4">
         <div className="text-white mb-1 font-title text-sectionHead">
@@ -28,11 +32,12 @@ const SpotlightSection = () => {
         {discountedPackages != undefined &&
           discountedPackages.length > 0 &&
           discountedPackages.map((pack) => {
-            if (pack.discountedPrice != "")
-              return <Spotlight key={pack.id} pack={pack} />;
+            return <Spotlight key={pack.id} pack={pack} />;
           })}
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 

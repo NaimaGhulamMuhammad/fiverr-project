@@ -1,24 +1,28 @@
 import { IonGrid, IonRow } from "@ionic/react";
-import ConsultCircle from "../../ui/consultation/ConsultCircle";
-import AllSpecialitiesCirlceItems from "../../../components/ui/consultation/all-specialities/AllSpecialitiesCirlceItems";
+import CategoryCircle from "../../ui/articles/CategoryCircle";
+import AllCategoriesCircleItems from "../../../components/ui/articles/AllCategoriesCircleItems";
 import { categoryNames } from "../../../lib/constants/categoryNames";
 import { BottomSheetModal } from "../core/Modals";
 import useModal from "../../../lib/hooks/useModal";
 import { Button } from "../core/Buttons";
 import formatTitle from "../../../lib/hooks/formatTitle";
 
-const CategoriesMobile = ({ title }) => {
+interface CategoriesMobileMenuProps {
+  title: string;
+}
+
+const CategoriesMobile = ({ title }: CategoriesMobileMenuProps) => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
     <div>
       <div className="grid grid-cols-4 gap-4 py-2">
         {categoryNames.slice(0, 4).map((categoryName, idx) => (
-          <ConsultCircle
+          <CategoryCircle
             key={idx}
             name={formatTitle(categoryName.name)}
             icon={categoryName.icon}
-            route={categoryName?.route}
+            href={categoryName.route}
           />
         ))}
       </div>
@@ -32,12 +36,12 @@ const CategoriesMobile = ({ title }) => {
       >
         <IonGrid fixed>
           <IonRow>
-            {categoryNames.map((s, idx) => (
-              <AllSpecialitiesCirlceItems
+            {categoryNames.map((category, idx) => (
+              <AllCategoriesCircleItems
                 key={idx}
-                icon={s.icon}
-                name={formatTitle(s.name)}
-                route={s.route}
+                icon={category.icon}
+                name={formatTitle(category.name)}
+                href={category.route}
                 closeModal={closeModal}
               />
             ))}

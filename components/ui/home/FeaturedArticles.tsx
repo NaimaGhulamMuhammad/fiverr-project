@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import ArticleCard from "../articles/ArticleCard";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { backend_api } from "../../../lib/constants/routes_constants";
-import ArticleCard from "../articles/ArticleCard";
 
+import { backend_api } from "../../../lib/constants/routes_constants";
 
 const FeaturedArticles = () => {
   const [articles, setArticles] = useState([]);
@@ -26,17 +26,17 @@ const FeaturedArticles = () => {
         Featured Articles
       </div>
       <div className="flex w-full overflow-x-auto snap-x md:justify-between pb-4 pl-4 gap-3">
-        {articles.map((el, index) => {
+        {articles.map((article, index) => {
           if (index < 4)
             return (
               <ArticleCard
                 key={index}
-                title={el.title}
-                imageUrl={el.image}
-                content={el.summary}
-                date={el.datePublished}
-                href={`/articles/${el.articleRoute?.replace(".md", "")}`}
-                tags={el.tags}
+                title={article.title}
+                imageUrl={article.image}
+                content={article.summary}
+                date={article.datePublished}
+                href={`/articles/${article.articleRoute?.replace(".md", "")}`}
+                tags={article.tags}
               />
             );
         })}

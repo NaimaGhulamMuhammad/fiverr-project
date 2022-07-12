@@ -19,7 +19,7 @@ const CategoryName = () => {
 
   useEffect(() => {
     (async () => {
-      const tags = categories[params.category] ?? [];
+      const tags = categories[params.category];
       const name =
         categoryNames.find((c) => c.route.endsWith(params.category))?.name ??
         "";
@@ -40,9 +40,7 @@ const CategoryName = () => {
         throw err;
       }
     })();
-  }, []);
-
-
+  }, [params]);
 
   return (
     <IonPage>

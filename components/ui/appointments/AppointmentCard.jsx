@@ -6,29 +6,26 @@ import { HiStatusOnline } from "react-icons/hi";
 import { GiFaceToFace } from "react-icons/gi";
 import { FaRegAddressBook } from "react-icons/fa";
 import { BiTimeFive } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import {
+  getWeekday,
+  getDate,
+  getTime,
+  getMonth,
+} from "../../../utils/date/DateFunctions";
 
-const AppointmentCard = ({ booking }) => {
+const AppointmentCard = ({ appointment }) => {
   return (
-    <Card
-      classes="bg-white"
-      hoverEffect={true}
-      dropShadow={true}
-      key={booking.id}
-    >
+    <Card classes="bg-white" hoverEffect={true} dropShadow={true}>
       <div className="flex flex-col w-full relative py-2 px-3">
         <div className="flex flex-row items-end justify-start border-b pb-2">
-          <img
+          {/* <img
             src={booking.imageUrl}
             alt="profile"
             className="w-16 h-16 object-cover rounded-half shadow-lg mx-1"
-          />
+          /> */}
           <div className="flex flex-col justify-center items-start px-2 mx-1">
             <p className="text-lg font-bold font-title text-primary-100">
-              Dr. {booking.name}
-            </p>
-            <p className="text-sm font-general text-secondary-100">
-              {booking.specialty}
+              {appointment.title}
             </p>
           </div>
         </div>
@@ -37,54 +34,52 @@ const AppointmentCard = ({ booking }) => {
             <div className="flex justify-center items-center py-1 mb-1">
               <AiOutlineCalendar className="w-5 h-5 text-primary-100 mr-1" />
               <SmallText classes="text-sm font-general text-slate-700 ml-1">
-                {booking.date}
+                <span>
+                  {getWeekday(appointment.startDateTimeUTC).substring(0, 3) +
+                    " - "}
+                </span>
+                <span>
+                  {getMonth(appointment.startDateTimeUTC).substring(0, 3) + " "}
+                </span>
+                <span>{getDate(appointment.startDateTimeUTC) + " ,"}</span>
               </SmallText>
             </div>
             <div className="flex justify-center items-center py-1 mb-1">
               <BiTimeFive className="w-5 h-5 text-primary-100 mr-1" />
               <SmallText classes="text-sm font-general text-slate-700 ml-1">
-                {booking.time}
+                {getTime(appointment.startDateTimeUTC)}
               </SmallText>
             </div>
           </div>
-          {booking.location && (
+          {appointment.location && (
             <div className="flex flex-row justify-start items-center">
               <FaRegAddressBook className="w-5 h-5 text-primary-100 mr-1" />
               <SmallText classes="text-sm font-general text-slate-700 ml-1">
-                {booking.location}
+                {appointment.location}
               </SmallText>
             </div>
           )}
-          {booking.isCanceled || (
-            <div className="flex items-center justify-center">
-              <Link to="/appointment" className="w-full">
-                <Button
-                  classes="font-general"
-                  primary={true}
-                  full={true}
-                  handleClick={() => {}}
-                >
-                  {booking.isCompleted
-                    ? "View Consultation"
-                    : "View Appointment"}
-                </Button>
-              </Link>
+          <div className="flex items-center  w-full">
+            <div className="w-full">
+              <Button
+                classes="font-general"
+                primary={true}
+                full={true}
+                handleClick={() => {}}
+                href="/appointment"
+              >
+                View Appointment
+              </Button>
             </div>
-          )}
+          </div>
         </div>
-        {booking.isOnline ? (
+        {appointment.isVirtual ? (
           <div className="absolute flex flex-row top-0 right-0 px-2 py-1 items-center justify-center">
             <HiStatusOnline className="w-4 h-4 text-emerald-500 mr-1" />
-            <SmallText classes="text-sm font-semibold font-general text-emerald-500 ml-1">
-              Online
-            </SmallText>
           </div>
         ) : (
           <div className="absolute flex flex-row top-0 right-0 px-2 py-1 items-center justify-center">
             <GiFaceToFace className="w-4 h-4 text-blue-500 mr-1" />
-            <SmallText classes="text-sm font-semibold font-general text-blue-500 ml-1">
-              Face-to-Face
-            </SmallText>
           </div>
         )}
       </div>

@@ -1,11 +1,10 @@
-import React from "react";
 import { getDiscountPercentage } from "../../../../utils/price/discount";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
 
 const Spotlight = ({ pack }) => {
   return (
-    <Link href={`/package/${pack.routeName}`}>
+    <Link to={`/package/${pack.slug}`}>
       <div className="flex flex-row mr-3 items-center justify-between cursor-pointer w-72 flex-none border rounded-2xl shadow-lg font-general bg-gradient-to-br from-tertiary-50 via-tertiary-50 to-white h-64  p-4 text-cardTypo">
         <div className="w-full h-full flex flex-col justify-between">
           <div className="h-1/2 w-full flex flex-row">
@@ -14,8 +13,8 @@ const Spotlight = ({ pack }) => {
               <div className="flex flex-row items-end">
                 <div className="font-title text-4xl text-black">
                   {getDiscountPercentage(
-                    pack.discountedPrice.amount,
-                    pack.price.amount
+                    pack.price?.amount - 0.1 * pack.price?.amount,
+                    pack.price?.amount
                   )}
                   %
                 </div>
@@ -24,11 +23,7 @@ const Spotlight = ({ pack }) => {
             </div>
             <div className="flex justify-center items-center w-5/12 h-full">
               <img
-                src={
-                  pack.spotlightIcon != undefined
-                    ? `/icons/${pack.spotlightIcon}`
-                    : pack.imageURL
-                }
+                src={"/icons/outline-medical-briefcase.png"}
                 alt=""
                 className="h-20"
               />

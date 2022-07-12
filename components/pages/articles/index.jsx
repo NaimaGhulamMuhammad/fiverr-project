@@ -1,5 +1,5 @@
 import { IonContent, IonPage } from "@ionic/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { backend_api } from "../../../lib/constants/routes_constants";
 import ArticleCard from "../../ui/articles/ArticleCard";
 import CategoriesMobile from "../../ui/articles/CategoriesMobile";
@@ -33,15 +33,18 @@ const ArticlePage = () => {
                 All{" "}
               </h1>
               <div className="article-grid mb-12">
-                {articles.map((el, index) => (
+                {articles.map((article, index) => (
                   <ArticleCard
                     key={index}
-                    title={el.title}
-                    imageUrl={el.image}
-                    content={el.summary}
-                    date={el.datePublished}
-                    href={`/articles/${el.articleRoute?.replace(".md", "")}`}
-                    tags={el.tags}
+                    title={article.title}
+                    imageUrl={article.image}
+                    content={article.summary}
+                    date={article.datePublished}
+                    href={`/articles/${article.articleRoute?.replace(
+                      ".md",
+                      ""
+                    )}`}
+                    tags={article.tags}
                   />
                 ))}
               </div>

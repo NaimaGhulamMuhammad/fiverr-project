@@ -1,5 +1,4 @@
-import React from "react";
-const homeFooter = () => {
+const HomeFooter = () => {
   return (
     <div className="mb-4 mt-8 bg-tertiary-50 pb-20 pt-6 flex flex-col font-general">
       <div className="p-4 flex flex-col">
@@ -18,4 +17,4 @@ const homeFooter = () => {
   );
 };
 
-export default homeFooter;
+export default HomeFooter;

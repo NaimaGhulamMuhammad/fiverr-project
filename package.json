@@ -10,7 +10,8 @@
     "export": "next export",
     "prettify": "prettier --write .",
     "prepare": "husky install",
-    "build-ios": "next build && next export && npx cap run ios"
+    "build-ios": "next build && next export && npx cap run ios",
+    "build-android": "next build && next export && npx cap run android"
   },
   "dependencies": {
     "@capacitor/android": "^3.5.1",
@@ -23,7 +24,6 @@
     "@ionic/react-router": "^6.1.6",
     "@tailwindcss/typography": "^0.5.2",
     "autoprefixer": "^10.4.7",
-    "axios": "^0.27.2",
     "classnames": "^2.3.1",
     "graphql": "^16.5.0",
     "gray-matter": "^4.0.3",
@@ -33,11 +33,13 @@
     "qs": "^6.10.3",
     "react": "^17.0.2",
     "react-avatar": "^5.0.1",
+    "react-circular-progressbar": "^2.1.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-markdown": "^8.0.3",
     "react-router-dom": "^5.2.0",
+    "react-spinners": "^0.13.3",
     "react-tooltip": "^4.2.21",
     "recoil": "^0.7.3",
     "remark": "^14.0.2",

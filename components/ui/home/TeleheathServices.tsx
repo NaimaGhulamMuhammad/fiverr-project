@@ -1,7 +1,6 @@
-import React from "react";
 import ServiceCard from "./homeComponents/ServiceCard";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const TeleheathServices = () => {
   const teleServices = [
@@ -45,7 +44,7 @@ const TeleheathServices = () => {
         {teleServices.map((service, idx) => (
           <ServiceCard key={idx} service={service} />
         ))}
-        <Link href="/consult">
+        <Link to="/consult">
           <div className="h-full flex flex-col items-center justify-center self-center ml-4 mr-8 w-40 text-typo">
             <span className="px-4 mb-2">
               <BsFillArrowRightCircleFill size="40px" color="#FF6B35" />

@@ -1,8 +1,17 @@
-import React from "react";
-import Link from "next/link";
-const ServiceCard = ({ service }) => {
+import { Link } from "react-router-dom";
+
+interface ServiceProps {
+  service: {
+    icon: string;
+    name: string;
+    currency: string;
+    price: number;
+  };
+}
+
+const ServiceCard = ({ service }: ServiceProps) => {
   return (
-    <Link href="/home">
+    <Link to="/">
       <div className="flex flex-col mr-3 items-center cursor-pointer w-40 flex-none rounded-2xl font-general bg-white drop-shadow-md">
         <div className="h-24 w-full rounded-t-2xl flex items-center justify-center relative bg-tertiary-50">
           <span className="absolute rounded-full bg-white shadow p-1.5">

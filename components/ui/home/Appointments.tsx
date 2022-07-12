@@ -1,4 +1,3 @@
-import React from "react";
 import AppointmentCard from "./homeComponents/AppointmentCard";
 import {
   BsFillArrowRightCircleFill,
@@ -6,7 +5,7 @@ import {
   BsCalendar2CheckFill,
 } from "react-icons/bs";
 import { Button } from "../core/Buttons";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { APPOINTMENTS } from "../../../lib/data";
 
 const Appointments = () => {
@@ -28,7 +27,7 @@ const Appointments = () => {
                 No upcoming appointments.
               </span>
             </div>
-            <Link passHref href="/consult">
+            <Link to="/consult">
               <span>
                 <Button
                   handleClick={() => console.log("book now pressed")}
@@ -46,7 +45,7 @@ const Appointments = () => {
           </div>
         )}
         {APPOINTMENTS.length > 0 && (
-          <Link href="/appointments">
+          <Link to="/appointments">
             <div className="h-full flex flex-col items-center justify-center self-center ml-4 mr-8 w-40 text-typo">
               <span className="px-4 mb-2">
                 <BsFillArrowRightCircleFill size="40px" color="#FF6B35" />

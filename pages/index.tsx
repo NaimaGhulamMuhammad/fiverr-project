@@ -1,6 +1,7 @@
-import { SplashScreen } from "@capacitor/splash-screen";
+import { RecoilRoot } from "recoil";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
+import { SplashScreen } from "@capacitor/splash-screen";
 
 const App = dynamic(() => import("../components/AppShell"), {
   ssr: false,
@@ -11,5 +12,9 @@ export default function Index() {
     SplashScreen.hide();
   }, []);
 
-  return <App />;
+  return (
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
+  );
 }

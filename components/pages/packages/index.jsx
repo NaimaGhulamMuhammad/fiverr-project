@@ -3,38 +3,55 @@ import { SubHeadingText, RegularText } from "../../ui/core/Text";
 import Container from "../../ui/layouts/Container";
 import { TopHeader } from "../../ui/layouts/Headers";
 import CardPackageItem from "../../ui/packages/CardPackageItem";
-import { PACKAGES, SERVICES, BENEFITS } from "../../../lib/data";
+import { ITEMS } from "../../../lib/data";
 import Tabs from "../../ui/core/Tabs";
-import { IonContent, IonFooter, IonPage, IonToolbar } from "@ionic/react";
+import { IonContent, IonPage } from "@ionic/react";
 
 const Packages = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   const allMappedPackages = () => {
-    return PACKAGES.map((pack) => ({
-      ...pack,
-      services: SERVICES.filter((service) =>
-        pack.serviceIds.includes(service.id)
-      ).map((s) => ({
-        ...s,
-        benefits: BENEFITS.filter(
-          (benefit) =>
-            pack.benefitIds.includes(benefit.id) &&
-            benefit.serviceId.includes(s.id)
-        ),
-      })),
-      optionalServices: SERVICES.filter((optS) =>
-        pack.optionalServiceIds.includes(optS.id)
-      ).map((os) => ({
-        ...os,
-        optionalBenefits: BENEFITS.filter(
-          (optB) =>
-            pack.optionalBenefitIds.includes(optB.id) &&
-            optB.serviceId.includes(os.id)
-        ),
-      })),
-    }));
+    const packsList = ITEMS.filter((item) => item.type == "package");
+    const packListFinal = packsList.map((pack) => {
+      const containedServices = pack.contains.filter(
+        (service) => service.isOptional == false
+      );
+      const serviceList = containedServices.map((service) => {
+        return ITEMS.find((item) => item.id == service.itemId);
+      });
+      const serviceListWithBenefits = serviceList.map((service) => {
+        const containedBenefits = service.contains.map((benefit) => {
+          return ITEMS.find((item) => item.id == benefit.itemId);
+        });
+        return {
+          ...service,
+          benefits: containedBenefits,
+        };
+      });
+      const containedOptServices = pack.contains.filter(
+        (service) => service.isOptional == true
+      );
+      const optServiceList = containedOptServices.map((service) => {
+        return ITEMS.find((item) => item.id == service.itemId);
+      });
+      const optServiceListWithBenefits = optServiceList.map((service) => {
+        const containedBenefits = service.contains.map((benefit) => {
+          return ITEMS.find((item) => item.id == benefit.itemId);
+        });
+        return {
+          ...service,
+          benefits: containedBenefits,
+        };
+      });
+      return {
+        ...pack,
+        services: serviceListWithBenefits,
+        optionalServices: optServiceListWithBenefits,
+      };
+    });
+    return packListFinal;
   };
+  console.log(allMappedPackages());
 
   const tabToRender = () => {
     const allPackages = allMappedPackages();
@@ -60,7 +77,7 @@ const Packages = () => {
     <IonPage>
       <TopHeader pageName={"Health Packages"} />
       <IonContent>
-        <Container>
+        <Container mainPage>
           <div className="flex justify-center my-3">
             <Tabs
               tabs={["All packages", "Best for you"]}
@@ -71,10 +88,11 @@ const Packages = () => {
           {tabToRender()}
         </Container>
       </IonContent>
-      {/* <IonFooter> */}
-      {/* <IonToolbar> */}
-      {/* </IonToolbar> */}
-      {/* // </IonFooter> */}
+      {/* <IonFooter>
+        <IonToolbar>
+          <IonTitle>Test</IonTitle>
+        </IonToolbar>
+      </IonFooter> */}
     </IonPage>
   );
 };

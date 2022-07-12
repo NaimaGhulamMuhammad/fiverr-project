@@ -1,5 +1,4 @@
-import React from "react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { FaUserMd } from "react-icons/fa";
 import { IoCalendarOutline } from "react-icons/io5";
 import { HiOutlineVideoCamera } from "react-icons/hi";
@@ -11,9 +10,19 @@ import {
   getTime,
 } from "../../../../utils/date/DateFunctions";
 
+// interface AppoinmentCardProps {
+//   appointment: {
+//     title: string;
+//     designation?: string;
+//     isVirtual: boolean;
+//     startDate: string;
+//     endDate: string;
+//   };
+// }
+
 const AppointmentCard = ({ appointment }) => {
   return (
-    <Link href="/home">
+    <Link to="/">
       <div className="flex flex-col mr-3 p-4 items-center justify-between cursor-pointer w-72 flex-none border rounded-2xl font-general bg-tertiary-100">
         <div className="w-full flex mb-4 items-center">
           <div className="bg-white/40 shadow-sm h-max p-4 rounded-2xl flex items-center justify-center">
@@ -37,13 +46,16 @@ const AppointmentCard = ({ appointment }) => {
           <IoCalendarOutline size="28px" color="#ffffff" />
           <div className="ml-4">
             <span>
-              {getWeekday(appointment.startDate).substring(0, 3) + " - "}
+              {getWeekday(appointment?.startDateTimeUTC).substring(0, 3) +
+                " - "}
             </span>
-            <span>{getMonth(appointment.startDate).substring(0, 3) + " "}</span>
-            <span>{getDate(appointment.startDate) + " ,"}</span>
+            <span>
+              {getMonth(appointment?.startDateTimeUTC).substring(0, 3) + " "}
+            </span>
+            <span>{getDate(appointment?.startDateTimeUTC) + " ,"}</span>
             <br />
-            <span>{getTime(appointment?.startDate) + " - "}</span>
-            <span>{getTime(appointment?.endDate)}</span>
+            <span>{getTime(appointment?.startDateTimeUTC) + " - "}</span>
+            <span>{getTime(appointment?.endDateTimeUTC)}</span>
           </div>
         </div>
       </div>

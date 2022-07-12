@@ -5,7 +5,11 @@ export default function handler(req, res) {
     let articles = [];
     if (req.query.categoryName === "latest") {
       articles = allArticles
-        .sort((a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime() )
+        .sort(
+          (a, b) =>
+            new Date(b.datePublished).getTime() -
+            new Date(a.datePublished).getTime()
+        )
         .slice(0, 5);
     } else {
       const { tags } = JSON.parse(req.body);
