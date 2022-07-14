@@ -20,6 +20,7 @@ const CategoriesMobile = ({ title }: CategoriesMobileMenuProps) => {
         {categoryNames.slice(0, 4).map((categoryName, idx) => (
           <CategoryCircle
             key={idx}
+            // name={formatTitle(categoryName.name)}
             name={formatTitle(categoryName.name)}
             icon={categoryName.icon}
             href={categoryName.route}
