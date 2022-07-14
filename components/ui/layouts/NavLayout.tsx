@@ -38,7 +38,7 @@ const NavLayout = ({ children }: LayoutProps) => {
   ];
 
   return (
-    <div className="fixed bottom-0 z-50 w-full">
+    <div className="fixed bottom-0 z-40 w-full">
       <NavigationMenu menuItems={menuItems} selectedItem={selectedItem} />
       <div>{children}</div>
     </div>

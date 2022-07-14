@@ -1,3 +1,4 @@
+import * as React from "react";
 import Categories from "../../ui/consultation/Categories";
 import SpecialitiesPreviewMenu from "../../ui/consultation/SpecialitiesPreviewMenu";
 import SymptomsList from "../../ui/consultation/SymptomsList";
