@@ -7,7 +7,7 @@ const Loader = () => {
   return (
     <div
       style={{ display: loader.open ? "flex" : "none" }}
-      className="w-full fixed h-full	bg-opacity-50 bg-black z-50 flex items-center justify-center"
+      className="w-full fixed h-full bg-opacity-50 bg-black z-50 flex items-center justify-center"
     >
       <img
         className="h-52"
