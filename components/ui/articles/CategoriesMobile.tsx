@@ -6,9 +6,17 @@ import useModal from "../../../lib/hooks/useModal";
 import { Button } from "../core/Buttons";
 import formatTitle from "../../../lib/hooks/formatTitle";
 import SeeArticleCategories from "../core/modals/SeeArticleCategories";
+import { useParams } from "react-router-dom";
 
 const CategoriesMobile = () => {
   const { openModal, setModal, closeModal } = useModal();
+  const params = useParams<{ category: string }>();
+
+  const isActive = (category: string) => {
+    const paths = category.split("/");
+    const last = paths[paths.length - 1];
+    return last === params.category;
+  };
 
   return (
     <div>
@@ -41,6 +49,7 @@ const CategoriesMobile = () => {
                 name={formatTitle(category.name)}
                 href={category.route}
                 closeModal={closeModal}
+                isActive={isActive(category.route)}
               />
             ))}
           </IonRow>
