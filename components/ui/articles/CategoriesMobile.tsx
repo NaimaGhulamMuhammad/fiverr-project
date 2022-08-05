@@ -6,16 +6,17 @@ import useModal from "../../../lib/hooks/useModal";
 import { Button } from "../core/Buttons";
 import formatTitle from "../../../lib/hooks/formatTitle";
 import SeeArticleCategories from "../core/modals/SeeArticleCategories";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { getCategoryFromUrl } from "../../../utils/route";
 
 const CategoriesMobile = () => {
   const { openModal, setModal, closeModal } = useModal();
-  const params = useParams<{ category: string }>();
+  const { pathname: params } = useLocation();
 
   const isActive = (category: string) => {
-    const paths = category.split("/");
-    const last = paths[paths.length - 1];
-    return last === params.category;
+    const last = getCategoryFromUrl(category);
+    const current = getCategoryFromUrl(params);
+    return last === current;
   };
 
   return (
