@@ -6,34 +6,80 @@ import DoctorSlots from "../../../ui/book-appointment/DoctorSlots";
 import { DOCTORS } from "../../../../lib/data/doctors/doctors.data";
 import { useParams } from "react-router-dom";
 import Container from "../../../ui/layouts/Container";
-import useNav from "../../../../lib/hooks/useNav";
+import Tabs from "../../../ui/core/Tabs";
+import DoctorSlotsOnline from "../../../ui/book-appointment/DoctorSlotsOnline";
+import { BsCalendarX } from "react-icons/bs";
+import AppointmentDisclaimerModal from "../../../ui/core/modals/AppointmentDisclaimer";
+import Disclaimer from "../disclaimer/Disclaimer";
+import { useHistory } from "react-router-dom";
 
 const BookOfflineAppointment = () => {
   const params = useParams();
   const [doctor, setDoctor] = useState();
-  const { hideNav, showNav } = useNav();
-
-  useEffect(() => {
-    hideNav();
-    return () => {
-      showNav();
-    };
-  }, []);
-
+  const [selectedTab, setSelectedTab] = useState(0);
   useEffect(() => {
     const docId = params.id;
     const doc = DOCTORS.find((d) => d.id == docId);
     setDoctor(doc);
   });
+  useEffect(() => {
+    if (doctor) {
+      setSelectedTab(doctor.mode.includes("Online") ? 0 : 1);
+    }
+  }, [doctor]);
+
+  const history = useHistory();
+  const afterBookingAppointment = () => {
+    history.push("/pre-appointment");
+  };
 
   return (
     <IonPage>
       <TopHeader pageName="Book an appointment" back classes="font-general" />
       <IonContent>
         <Container>
-          <DoctorDetails doctor={doctor} />
-          <DoctorSlots doctor={doctor} btnText="Book Appointment" />
+          <div className="flex flex-col pb-14">
+            <DoctorDetails doctor={doctor} />
+            <div className="w-full flex items-center justify-center">
+              <Tabs
+                tabs={["Online", "In-person"]}
+                selected={selectedTab}
+                handleSelectTab={(id) => setSelectedTab(id)}
+                classes="drop-shadow font-general"
+              />
+            </div>
+            {selectedTab === 0 &&
+              (doctor && doctor.workSchedule && doctor.workSchedule.online ? (
+                <DoctorSlotsOnline
+                  doctor={doctor}
+                  btnText="Book Appointment"
+                  href="/pre-appointment"
+                />
+              ) : (
+                <div className="font-general font-semibold text-lg mt-20 text-center flex flex-col items-center">
+                  <BsCalendarX size="64px" className="mb-4 text-red-600" />
+                  Sorry this mode is not available for current doctor!
+                </div>
+              ))}
+
+            {selectedTab === 1 &&
+              (doctor && doctor.workSchedule && doctor.workSchedule.offline ? (
+                <DoctorSlots
+                  doctor={doctor}
+                  btnText="Book Appointment"
+                  href="/pre-appointment"
+                />
+              ) : (
+                <div className="font-general font-semibold text-lg mt-20 text-center flex flex-col items-center">
+                  <BsCalendarX size="64px" className="mb-4 text-red-600" />
+                  Sorry this mode is not available for current doctor!
+                </div>
+              ))}
+          </div>
         </Container>
+        <AppointmentDisclaimerModal>
+          <Disclaimer afterBookingAppointment={afterBookingAppointment} />
+        </AppointmentDisclaimerModal>
       </IonContent>
     </IonPage>
   );

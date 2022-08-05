@@ -3,21 +3,21 @@ import { useRecoilState } from "recoil";
 import { modalState } from "../../recoil/atoms";
 
 const useModal = () => {
-  const [isOpen, setIsOpen] = useRecoilState(modalState);
+  const [openModal, setOpenModal] = useRecoilState(modalState);
 
   const closeModal = () => {
-    setIsOpen(false);
+    setOpenModal(null);
   };
 
-  const openModal = () => {
-    setIsOpen(true);
+  const setModal = (modal: string) => {
+    setOpenModal(modal);
   };
 
   useEffect(() => {
-    return () => setIsOpen(false);
-  }, [setIsOpen]);
+    return () => setModal(null);
+  }, [setOpenModal]);
 
-  return { isOpen, openModal, closeModal };
+  return { openModal, setModal, closeModal };
 };
 
 export default useModal;

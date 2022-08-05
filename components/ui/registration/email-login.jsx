@@ -3,7 +3,7 @@ import { Button } from "../core/Buttons";
 import { Link } from "react-router-dom";
 import { SmallText, SubHeadingText } from "../core/Text";
 
-const EmailLogin = () => {
+const EmailLogin = ({ startingScreen }) => {
   return (
     <div className="flex flex-col items-center justify-center w-full px-10">
       <form>
@@ -25,9 +25,11 @@ const EmailLogin = () => {
         </div>
         <div className="flex flex-row w-full justify-center items-center">
           <Button
-            classes="w-[18rem] font-title shadow-md"
+            classes="w-[18rem] font-title shadow-md !bg-blue-500"
             type={"submit"}
-            href={"/home"}
+            href={
+              startingScreen == -1 ? "/home" : `/onboarding/${startingScreen}`
+            }
           >
             Sign in
           </Button>

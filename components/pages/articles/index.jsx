@@ -1,6 +1,5 @@
 import { IonContent, IonPage } from "@ionic/react";
 import { useEffect, useState } from "react";
-import { backend_api } from "../../../lib/constants/routes_constants";
 import ArticleCard from "../../ui/articles/ArticleCard";
 import CategoriesMobile from "../../ui/articles/CategoriesMobile";
 import Container from "../../ui/layouts/Container";
@@ -12,7 +11,7 @@ const ArticlePage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(`${backend_api}`);
+        const response = await fetch("/api/articles");
         const result = await response.json();
         setArticles(result);
       } catch (err) {

@@ -6,6 +6,8 @@ import SelectSlot from "./SelectSlot";
 import { useTimeslots } from "../../../lib/hooks/getTimeSlots";
 import { useDisabledDates } from "../../../lib/hooks/getDisabledDates";
 import { useQuickDateslots } from "../../../lib/hooks/getQuickDateslots";
+import useModal from "../../../lib/hooks/useModal";
+import { useHistory } from "react-router-dom";
 
 const DoctorSlots = ({ doctor, btnText, href }) => {
   const getQuickDateSlots = useQuickDateslots();
@@ -23,9 +25,12 @@ const DoctorSlots = ({ doctor, btnText, href }) => {
     evening: [],
   });
   const [selectedTimeslot, setSelectedTimeslot] = useState();
+  const { setModal } = useModal();
+  const history = useHistory();
 
   const bookAppointment = () => {
     if (selectedDate && locationKey && selectedTimeslot) {
+      setModal("appointment-disclaimer");
       console.log({
         date: selectedDate,
         time: selectedTimeslot,
@@ -39,21 +44,23 @@ const DoctorSlots = ({ doctor, btnText, href }) => {
   //Set location when doctor is loaded
   useEffect(() => {
     if (doctor) {
-      setLocationKey(doctor.workSchedule[0].branchid);
+      setLocationKey(doctor.workSchedule.offline[0].branchid);
     }
   }, [doctor]);
 
   // set dateslots whenever locationKey is changed
   useEffect(() => {
-    if (doctor) {
+    if (doctor && locationKey) {
+      console.log(locationKey);
       const dates = getQuickDateSlots(doctor, locationKey);
       setDateSlots(dates);
       setStartDate();
       setDisabledDates(
         getDisabledDates(
-          doctor.workSchedule.find((doc) => doc.branchid == locationKey)
-            ? doctor.workSchedule.find((doc) => doc.branchid == locationKey)
-                .specialHours
+          doctor.workSchedule.offline.find((doc) => doc.branchid == locationKey)
+            ? doctor.workSchedule.offline.find(
+                (doc) => doc.branchid == locationKey
+              ).specialHours
             : []
         )
       );
@@ -112,7 +119,10 @@ const DoctorSlots = ({ doctor, btnText, href }) => {
       />
       <RoundedBottomBar
         text={btnText}
-        handleClick={bookAppointment}
+        handleClick={() => {
+          bookAppointment();
+          history.push("/pre-appointment");
+        }}
         clickable={selectedDate && locationKey && selectedTimeslot}
         href={href}
       />

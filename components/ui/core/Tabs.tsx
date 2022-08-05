@@ -1,12 +1,13 @@
 import { MediumText } from "./Text";
 
 interface TabProps {
-  tabs: [];
+  tabs: string[];
   selected?: number;
-  handleSelectTab?: (a: number) => {};
+  handleSelectTab?: (a: number) => void;
+  classes?: string;
 }
 
-const Tabs = ({ tabs, selected, handleSelectTab }: TabProps) => {
+const Tabs = ({ tabs, selected, handleSelectTab, classes }: TabProps) => {
   return (
     <div className="flex mx-auto">
       {tabs.map((tab, idx) => (
@@ -15,7 +16,7 @@ const Tabs = ({ tabs, selected, handleSelectTab }: TabProps) => {
             idx === 0 ? "rounded-l-lg border-r-0" : ""
           } ${idx === tabs.length - 1 ? "rounded-r-lg border-l-0" : ""} ${
             selected === idx ? "bg-secondary-100 text-white" : ""
-          }`}
+          } ${classes}`}
           key={idx}
           onClick={() => handleSelectTab(idx)}
         >

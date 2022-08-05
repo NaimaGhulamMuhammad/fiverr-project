@@ -2,17 +2,13 @@ import { IonGrid, IonRow } from "@ionic/react";
 import CategoryCircle from "../../ui/articles/CategoryCircle";
 import AllCategoriesCircleItems from "../../../components/ui/articles/AllCategoriesCircleItems";
 import { categoryNames } from "../../../lib/constants/categoryNames";
-import { BottomSheetModal } from "../core/Modals";
 import useModal from "../../../lib/hooks/useModal";
 import { Button } from "../core/Buttons";
 import formatTitle from "../../../lib/hooks/formatTitle";
+import SeeArticleCategories from "../core/modals/SeeArticleCategories";
 
-interface CategoriesMobileMenuProps {
-  title: string;
-}
-
-const CategoriesMobile = ({ title }: CategoriesMobileMenuProps) => {
-  const { isOpen, openModal, closeModal } = useModal();
+const CategoriesMobile = () => {
+  const { openModal, setModal, closeModal } = useModal();
 
   return (
     <div>
@@ -20,21 +16,22 @@ const CategoriesMobile = ({ title }: CategoriesMobileMenuProps) => {
         {categoryNames.slice(0, 4).map((categoryName, idx) => (
           <CategoryCircle
             key={idx}
-            // name={formatTitle(categoryName.name)}
             name={formatTitle(categoryName.name)}
             icon={categoryName.icon}
             href={categoryName.route}
           />
         ))}
       </div>
-      <Button handleClick={openModal} full classes={"mt-1"}>
+      <Button
+        handleClick={() => {
+          setModal("see-article-categories");
+        }}
+        full
+        classes={"mt-1"}
+      >
         See All Categories
       </Button>
-      <BottomSheetModal
-        isOpen={isOpen}
-        closeModal={closeModal}
-        title="Select a category"
-      >
+      <SeeArticleCategories>
         <IonGrid fixed>
           <IonRow>
             {categoryNames.map((category, idx) => (
@@ -48,7 +45,7 @@ const CategoriesMobile = ({ title }: CategoriesMobileMenuProps) => {
             ))}
           </IonRow>
         </IonGrid>
-      </BottomSheetModal>
+      </SeeArticleCategories>
     </div>
   );
 };

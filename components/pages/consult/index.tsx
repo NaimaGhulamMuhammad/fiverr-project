@@ -10,10 +10,10 @@ const Consult: React.FC = () => {
     <IonPage>
       <TopHeader pageName={"Consultation"} />
       <IonContent>
-        <Container>
+        <Container mainPage>
           <SpecialitiesPreviewMenu />
-          <SymptomsList />
-          <Categories />
+          {/* <SymptomsList /> */}
+          {/* <Categories /> */}
         </Container>
       </IonContent>
     </IonPage>

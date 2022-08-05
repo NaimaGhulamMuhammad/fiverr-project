@@ -4,7 +4,6 @@ import {
   categories,
   categoryNames,
 } from "../../../../lib/constants/categoryNames";
-import { backend_api } from "../../../../lib/constants/routes_constants";
 import formatTitle from "../../../../lib/hooks/formatTitle";
 import ArticlesSection from "../../../ui/articles/ArticlesSection";
 import CategoriesMobile from "../../../ui/articles/CategoriesMobile";
@@ -27,13 +26,10 @@ const CategoryName = () => {
       setTitle(name);
 
       try {
-        const response = await fetch(
-          `${backend_api}/categories/${params.category}`,
-          {
-            method: "POST",
-            body: JSON.stringify({ tags }),
-          }
-        );
+        const response = await fetch(`/api/categories/${params.category}`, {
+          method: "POST",
+          body: JSON.stringify({ tags }),
+        });
         const result = await response.json();
         setArticles(result);
       } catch (err) {

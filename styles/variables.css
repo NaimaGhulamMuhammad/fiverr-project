@@ -81,7 +81,7 @@
 }
 .toolbar-background-home {
   --background: #eb7700;
-  --min-height: 10px;
+  --min-height: 0px;
 }
 
 /* .ios {

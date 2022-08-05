@@ -4,7 +4,7 @@ import Floater from "../core/Floater";
 import { Link } from "react-router-dom";
 const RoundedBottomBar = ({ clickable, text, handleClick, href }) => {
   return (
-    <Floater classes="z-50 bg-transparent border-none !pb-4 !px-8">
+    <Floater classes="z-50 bg-transparent border-none bottom-4 !px-8 !py-0">
       {clickable && href ? (
         <Link to={href} className="w-full">
           <div

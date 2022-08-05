@@ -1,7 +1,6 @@
 import { Button } from "../../core/Buttons";
 import { Card } from "../../core/Card";
-import { HiStatusOnline } from "react-icons/hi";
-import { FaRegAddressBook } from "react-icons/fa";
+import { HiStatusOnline, HiOutlineClock } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import Bookmark from "../../core/Bookmark";
 import {
@@ -10,12 +9,17 @@ import {
   RegularText,
   SmallText,
 } from "../../core/Text";
-
+import useModal from "../../../../lib/hooks/useModal";
+import { useRef } from "react";
+import CheckDoctorAvailability from "../../core/modals/CheckDoctorAvailability";
 const DoctorCard = ({ doctor, bookmarked }) => {
+  const mailBtnRef = useRef(null);
+  const { setModal } = useModal();
+
   return (
     <Card dropShadow classes={"w-full relative my-4 py-2 px-4 z-0"}>
       <div className="flex flex-row justify-between">
-        <Link to={`/doctor?id=${doctor.id}`}>
+        <Link to={`/doctor/${doctor.id}`}>
           <div className="flex items-center mb-2">
             <img
               src={doctor.imageUrl}
@@ -42,10 +46,6 @@ const DoctorCard = ({ doctor, bookmarked }) => {
             )}
           </div>
           <div className="">
-            <div className="flex items-center mt-4 mb-2">
-              <FaRegAddressBook className="w-4 h-4 text-primary-100" />
-              <SmallText classes={"mx-2"}>{doctor.location}</SmallText>
-            </div>
             <div className="flex items-center">
               <MediumText classes={"text-primary-100 font-semibold"}>
                 {doctor.fees}
@@ -59,21 +59,50 @@ const DoctorCard = ({ doctor, bookmarked }) => {
         </div>
       </div>
       <div className="flex justify-between w-full">
-        <Button
-          href={`/doctors/book-appointment/${doctor.id}`}
-          primary
-          full={!doctor.mode.includes("Online")}
-        >
-          <SmallText classes={"font-semibold"}>Book Appointment</SmallText>
-        </Button>
+        {(doctor.mode.includes("Online") ||
+          doctor.mode.includes("Offline")) && (
+          <Button
+            href={`/doctors/book-appointment/${doctor.id}`}
+            primary
+            hover
+            full={!doctor.mode.includes("Online")}
+          >
+            <SmallText classes={"font-semibold"}>Book Appointment</SmallText>
+          </Button>
+        )}
         {doctor.mode.includes("Online") ? (
-          <Button href={"/online-consultation/book-consultation"}>
-            <SmallText classes={"font-semibold"}>Consult Online</SmallText>
+          <Button
+            handleClick={() => {
+              setModal("appointment-disclaimer");
+            }}
+            hover
+          >
+            <SmallText classes={"font-semibold"}>Consult Now</SmallText>
           </Button>
         ) : (
           <></>
         )}
+        {!doctor.mode.includes("Online") && !doctor.mode.includes("Offline") && (
+          <Button
+            full
+            handleClick={() => setModal("doctor-availability")}
+            hover
+          >
+            <SmallText
+              classes={"flex items-center justify-center font-semibold"}
+            >
+              <HiOutlineClock size="24px" className="mr-2" />
+              Check Availability
+            </SmallText>
+          </Button>
+        )}
+        <a
+          href={`mailto:abc@example.com?subject=Enquiry on the available time slots for ${doctor.name}&body=%0D%0AHi My Healthcare Collective,%0D%0A%0D%0AI would like to enquire on the available time slots for ${doctor.name}%0D%0A%0D%0AMy preferred date and time slots are:%0D%0A%0D%0A1)%0D%0A%0D%0A2)%0D%0A%0D%0AMy details are as follows%0D%0AName:%0D%0APhone number:%0D%0AEmail:%0D%0A%0D%0AThanks!`}
+          className="hidden"
+          ref={mailBtnRef}
+        ></a>
       </div>
+      <CheckDoctorAvailability destructive mailBtnRef={mailBtnRef} />
     </Card>
   );
 };

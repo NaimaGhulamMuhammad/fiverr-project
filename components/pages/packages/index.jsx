@@ -51,7 +51,6 @@ const Packages = () => {
     });
     return packListFinal;
   };
-  console.log(allMappedPackages());
 
   const tabToRender = () => {
     const allPackages = allMappedPackages();

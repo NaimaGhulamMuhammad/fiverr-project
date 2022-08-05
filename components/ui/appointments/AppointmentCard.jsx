@@ -15,7 +15,7 @@ import {
 
 const AppointmentCard = ({ appointment }) => {
   return (
-    <Card classes="bg-white" hoverEffect={true} dropShadow={true}>
+    <Card classes="bg-white mb-6" hoverEffect={true} dropShadow={true}>
       <div className="flex flex-col w-full relative py-2 px-3">
         <div className="flex flex-row items-end justify-start border-b pb-2">
           {/* <img
@@ -35,7 +35,7 @@ const AppointmentCard = ({ appointment }) => {
               <AiOutlineCalendar className="w-5 h-5 text-primary-100 mr-1" />
               <SmallText classes="text-sm font-general text-slate-700 ml-1">
                 <span>
-                  {getWeekday(appointment.startDateTimeUTC).substring(0, 3) +
+                  {getWeekday(appointment.startDateTimeUTC)?.substring(0, 3) +
                     " - "}
                 </span>
                 <span>
@@ -66,7 +66,7 @@ const AppointmentCard = ({ appointment }) => {
                 primary={true}
                 full={true}
                 handleClick={() => {}}
-                href="/appointment"
+                href={`/appointment/${appointment.id}`}
               >
                 View Appointment
               </Button>

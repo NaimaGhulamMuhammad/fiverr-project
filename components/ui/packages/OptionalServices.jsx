@@ -1,7 +1,7 @@
-import { BENEFITS, SERVICES } from "../../../lib/data";
 import { currencyFormatter } from "../../../lib/helper/currency";
 import { RegularText, FadedSmallText, MediumText } from "../core/Text";
 import Selector from "../core/Selector";
+
 const OptionalServices = ({
   handleOptionalClick,
   healthPackage,
@@ -9,27 +9,21 @@ const OptionalServices = ({
 }) => {
   return (
     <div>
-      {healthPackage?.optionalServiceIds?.length > 0 ? (
+      {healthPackage?.optionalServices?.length > 0 ? (
         <div className="flex flex-col pb-2">
           <RegularText classes="font-medium">Optional Services</RegularText>
         </div>
       ) : (
         ""
       )}
-      {SERVICES.filter((service) =>
-        healthPackage?.optionalServiceIds?.includes(service.id)
-      ).map((service) => (
+      {healthPackage?.optionalServices?.map((service) => (
         <div key={service.id}>
           <div className="pb-2">
             <div className="text-primary-100 mt-2">
               <RegularText classes="font-medium">{service.name}</RegularText>
             </div>
             <FadedSmallText>{service.description}</FadedSmallText>
-            {BENEFITS.filter(
-              (benefit) =>
-                service.benefitIds.includes(benefit.id) &&
-                healthPackage?.optionalBenefitIds.includes(benefit.id)
-            ).map((benefit) => {
+            {service?.benefits?.map((benefit) => {
               const handleSelection = () => {
                 handleOptionalClick(benefit);
               };
@@ -49,8 +43,7 @@ const OptionalServices = ({
                       <></>
                     ) : (
                       <MediumText classes="text-sm font-medium ml-3">
-                        {benefit.price.ccyCode}
-                        {currencyFormatter(benefit.price.amount)}
+                        {currencyFormatter(benefit.price?.amount)}
                       </MediumText>
                     )}
                   </div>

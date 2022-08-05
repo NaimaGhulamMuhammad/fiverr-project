@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Link } from "react-router-dom";
 import { currencyFormatter } from "../../../lib/helper/currency";
 import { Button } from "../core/Buttons";
@@ -27,17 +26,12 @@ const CardPackageItem = ({ healthPackages }) => {
                   : pack.gender === "women"
                   ? "women"
                   : "men & women"
-              } ${
-                pack.ageGroup === "under-40"
-                  ? "under 40s"
-                  : pack.ageGroup === "over-40"
-                  ? "over 40s"
-                  : "for all age group"
-              }`}</FadedSmallText>
+              } 
+              `}</FadedSmallText>
               <hr />
             </div>
             <div>
-              <RegularText classes="font-general">{`Includes ${pack.serviceIds.length} services`}</RegularText>
+              <RegularText classes="font-general">{`Includes ${pack.services.length} services`}</RegularText>
               {pack.optionalServices.length > 0 && (
                 <FadedSmallText
                   classes={
@@ -52,26 +46,20 @@ const CardPackageItem = ({ healthPackages }) => {
               {pack.discountedPrice ? (
                 <div className="flex items-center">
                   <s className="font-general mr-2 text-gray-400">
-                    {`${pack.price?.ccyCode}${currencyFormatter(
-                      pack.price?.amount
-                    )}`}
+                    {`${currencyFormatter(pack.price?.amount)}`}
                   </s>
-                  <RegularText classes="text-primary-100">
-                    {`${pack.discountedPrice.ccyCode}${currencyFormatter(
-                      pack.discountedPrice.amount
-                    )}`}
+                  <RegularText classes="font-general text-primary-100">
+                    {`${currencyFormatter(pack.discountedPrice.amount)}`}
                   </RegularText>
                 </div>
-              ) : pack.price ? (
-                <RegularText classes="text-primary-100">
-                  {`${pack.price?.ccyCode}${currencyFormatter(
-                    pack.price?.amount
-                  )}`}
+              ) : pack.price && pack.price.amount != null ? (
+                <RegularText classes="font-general text-primary-100">
+                  {`${currencyFormatter(pack.price?.amount)}`}
                 </RegularText>
               ) : (
                 <div></div>
               )}
-              <Link to={`/package/${pack.routeName}`}>
+              <Link to={`/package/${pack.slug}`}>
                 <Button
                   handleClick={() => console.log("View Package!")}
                   primary

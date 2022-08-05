@@ -2,7 +2,7 @@ import { useState } from "react";
 import Accordion from "../../core/Accordion";
 import { Card } from "../../core/Card";
 
-const GlobalTestSummary = () => {
+const GlobalTestSummary = ({ summary }) => {
   const [openAccordion, setOpenAccordion] = useState(false);
 
   return (
@@ -11,9 +11,7 @@ const GlobalTestSummary = () => {
         classes={"border-none font-semibold"}
         open={openAccordion === "1"}
         title={"Test Summary"}
-        content={
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum interdum ex justo,malesuada consectetur purus porttitor eu."
-        }
+        content={summary}
         handleClick={() => {
           if (openAccordion === "1") {
             setOpenAccordion(false);

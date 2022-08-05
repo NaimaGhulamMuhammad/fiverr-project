@@ -11,7 +11,7 @@ const SelectLocation = ({ doctor, locationKey, setLocationKey }) => {
         Select location
       </RegularText>
       <div className="flex flex-col mb-4">
-        {doctor?.workSchedule.map((item) => (
+        {doctor?.workSchedule?.offline.map((item) => (
           <Selector
             key={item.id}
             handleSelection={() => setLocationKey(item.branchid)}

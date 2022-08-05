@@ -1,7 +1,26 @@
 import { Card } from "../../core/Card";
 import { FadedMediumText, MediumText } from "../../core/Text";
+import {
+  getWeekday,
+  getDate,
+  getMonth,
+  getFullYear,
+  getTime,
+} from "../../../../utils/date/DateFunctions";
 
-const AppointmentDetails = () => {
+const AppointmentDetails = ({ appointment }) => {
+  const getAppointmentDate = () => {
+    const date = new Date(appointment?.startDateTimeUTC);
+    return `${getWeekday(date)}, ${getDate(date)} ${getMonth(
+      date
+    )} ${getFullYear(date)}`;
+  };
+
+  const getAppointmentTime = () => {
+    const date = new Date(appointment?.startDateTimeUTC);
+    return `${getTime(date)}`;
+  };
+
   return (
     <Card classes={"px-4 py-3"}>
       <MediumText classes={"mb-2 font-semibold"}>
@@ -9,15 +28,15 @@ const AppointmentDetails = () => {
       </MediumText>
       <div className="flex justify-between">
         <FadedMediumText>Appointment ID</FadedMediumText>
-        <MediumText>GW41BK-0667</MediumText>
+        <MediumText>{appointment?.id}</MediumText>
+      </div>
+      <div className="flex justify-between">
+        <FadedMediumText>Booking date</FadedMediumText>
+        <MediumText>{getAppointmentDate()}</MediumText>
       </div>
       <div className="flex justify-between">
         <FadedMediumText>Booking time</FadedMediumText>
-        <MediumText>1st May 2022, 21:22</MediumText>
-      </div>
-      <div className="flex justify-between">
-        <FadedMediumText>Number of patient(s)</FadedMediumText>
-        <MediumText>1</MediumText>
+        <MediumText>{getAppointmentTime()}</MediumText>
       </div>
     </Card>
   );

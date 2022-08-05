@@ -8,7 +8,7 @@ const ExploreServices = () => {
       </div>
       <div className="w-full flex flex-row justify-between mt-2 mb-4 flex-wrap">
         <Link
-          to="/doctors"
+          to="/consult-gp"
           className="w-[45%] md:w-64 flex flex-col items-center cursor-pointer flex-none font-general bg-white drop-shadow rounded-xl overflow-hidden border-2 border-gray-100"
         >
           <div className="w-full flex flex-col items-center justify-center relative bg-white p-2">
@@ -16,7 +16,7 @@ const ExploreServices = () => {
               <img src="/icons/consultation.png" alt="icon" className="h-16" />
             </span>
             <div className="font-title text-lg text-center mb-2">
-              Instant video consultation
+              Consult with a GP
             </div>
           </div>
         </Link>
@@ -26,10 +26,10 @@ const ExploreServices = () => {
         >
           <div className="w-full flex flex-col items-center justify-center relative bg-white p-2">
             <span className="flex items-center justify-center w-full rounded-xl bg-gray-100 shadow-sm mb-3 py-3">
-              <img src="/icons/appointment.png" alt="icon" className="h-16" />
+              <img src="/icons/doctor.png" alt="icon" className="h-16" />
             </span>
             <div className="font-title text-lg text-center mb-2">
-              Book an Appointment
+              Consult with a specialist
             </div>
           </div>
         </Link>

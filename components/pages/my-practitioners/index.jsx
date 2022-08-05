@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { EditHeader } from "../../ui/layouts/Headers";
 import { DOCTORS } from "../../../lib/data";
 import DoctorCard from "../../ui/consultation/doctors/DoctorCard";
@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { Button } from "../../ui/core/Buttons";
 import { BsCalendar2CheckFill } from "react-icons/bs";
 import { IonContent, IonPage } from "@ionic/react";
-import useNav from "../../../lib/hooks/useNav";
 
 const MyPractitioners = () => {
   const [myDoctors, setMyDoctors] = useState(DOCTORS);
@@ -16,14 +15,6 @@ const MyPractitioners = () => {
   const [editMode, setEditMode] = useState(false);
   const [showRemoveToast, setShowRemoveToast] = useState(false);
   const [showEmptyRemoveToast, setShowEmptyRemoveToast] = useState(false);
-  const { hideNav, showNav } = useNav();
-
-  useEffect(() => {
-    hideNav();
-    return () => {
-      showNav();
-    };
-  }, []);
 
   const editFunction = () => {
     setEditMode(true);

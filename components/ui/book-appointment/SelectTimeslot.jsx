@@ -80,15 +80,26 @@ const SelectTimeslot = ({
             </div>
           </div>
         ))}
-        <DatePicker
-          customInput={<DateCustomInput />}
-          selected={startDate}
-          onChange={(date) => setStartDate(date)}
-          wrapperClassName="!w-auto"
-          minDate={dateSlots && dateSlots[0] ? dateSlots[0] : new Date()}
-          filterDate={isWeekday}
-          excludeDates={disabledDates}
-        />
+        {disabledDates ? (
+          <DatePicker
+            customInput={<DateCustomInput />}
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            wrapperClassName="!w-auto"
+            minDate={dateSlots && dateSlots[0] ? dateSlots[0] : new Date()}
+            filterDate={isWeekday}
+            excludeDates={disabledDates}
+          />
+        ) : (
+          <DatePicker
+            customInput={<DateCustomInput />}
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            wrapperClassName="!w-auto"
+            minDate={dateSlots && dateSlots[0] ? dateSlots[0] : new Date()}
+            filterDate={isWeekday}
+          />
+        )}
       </div>
     </>
   );

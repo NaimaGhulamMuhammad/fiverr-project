@@ -1,27 +1,17 @@
-import { useEffect } from "react";
 import { TopHeader } from "../../ui/layouts/Headers";
 import Container from "../../ui/layouts/Container";
 
 import PaymentDetails from "../../ui/appointments/payment-details";
 import ConsultationDetails from "../../ui/consultation/details/consultation-details";
 import ConsultationStatus from "../../ui/consultation/details/consultation-status";
-import PatientDetails from "../../ui/appointments/patient-details";
+import PatientDetails from "../../ui/appointments/PatientDetails";
 import { IonPage, IonContent } from "@ionic/react";
 import FloaterButton from "../../ui/appointments/FloaterButton";
 import useModal from "../../../lib/hooks/useModal";
-import useNav from "../../../lib/hooks/useNav";
-import { AlertModal } from "../../ui/core/Modals";
+import { AlertModal } from "../../ui/core/modals/Modal";
 
 const ConsultationDetailsPage = () => {
   const { isOpen, openModal, closeModal } = useModal();
-  const { hideNav, showNav } = useNav();
-
-  useEffect(() => {
-    hideNav();
-    return () => {
-      showNav();
-    };
-  }, []);
 
   const SampleData = [
     {

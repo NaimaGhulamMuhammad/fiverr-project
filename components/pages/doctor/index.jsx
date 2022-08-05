@@ -8,26 +8,19 @@ import DoctorServices from "../../ui/consultation/doctor-info/DoctorServices";
 import Location from "../../ui/consultation/doctor-info/Location";
 import Container from "../../ui/layouts/Container";
 import { TopHeader } from "../../ui/layouts/Headers";
-import useNav from "../../../lib/hooks/useNav";
+
 import { DOCTORS } from "../../../lib/data";
+import { useParams } from "react-router-dom";
 
 const Doctor = () => {
-  const path = window.location.search;
-  const query = new URLSearchParams(path);
+  const params = useParams();
 
   const [doctorData, setDoctorData] = useState();
 
-  const { hideNav, showNav } = useNav();
-
   useEffect(() => {
-    hideNav();
-    return () => {
-      showNav();
-    };
-  }, []);
-
-  useEffect(() => {
-    const doctorData = DOCTORS.find((p) => p.id.toString() === query.get("id"));
+    const doctorData = DOCTORS.find(
+      (doctor) => doctor.id.toString() === params.id
+    );
     setDoctorData(doctorData);
   });
 

@@ -11,7 +11,7 @@ const Orders = () => {
     return ORDERS.map((order) => {
       const mappedOrder = {
         ...order,
-        package: ITEMS.find((item) => item.id === order?.basket[0]?.itemId),
+        package: ITEMS.find((item) => item.id == order?.basket[0]?.itemId),
       };
       return mappedOrder;
     });

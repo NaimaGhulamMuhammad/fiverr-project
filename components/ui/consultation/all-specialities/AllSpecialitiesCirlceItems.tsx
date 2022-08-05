@@ -5,19 +5,20 @@ import { FadedSmallText } from "../../core/Text";
 interface SpecialitiesCircleProps {
   icon: string;
   name: string;
-  route: string;
+  specialityId?: string;
   closeModal: () => void;
+  href: string;
 }
 
 const AllSpecialitiesCirlceItems = ({
   icon,
   name,
-  route,
+  href,
   closeModal,
 }: SpecialitiesCircleProps) => {
   return (
     <IonCol size="4" onClick={closeModal}>
-      <Link to={route} className="flex flex-col items-center mb-2">
+      <Link to={href} className="flex flex-col items-center mb-2">
         <div className="p-2 bg-slate-50 rounded-full mb-2">
           <img src={icon} width={25} height={25} alt="myhc" />
         </div>

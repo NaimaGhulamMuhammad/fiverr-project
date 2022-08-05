@@ -29,7 +29,7 @@ const Spotlight = ({ pack }) => {
               />
             </div>
           </div>
-          <div className="h-1/2 font-title text-lg ">
+          <div className="h-1/2 font-title text-lg flex flex-col justify-between">
             {pack.spotlightName != undefined ? pack.spotlightName : pack.name}{" "}
             <div className="text-white bg-tertiary-100 mt-4 px-4 py-2 text-sm rounded-xl drop-shadow flex justify-between items-center">
               <span>View deal</span>

@@ -2,7 +2,6 @@ import { IonContent, IonPage } from "@ionic/react";
 import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
-import { backend_api } from "../../../lib/constants/routes_constants";
 import Container from "../../ui/layouts/Container";
 import { TopHeader } from "../../ui/layouts/Headers";
 import formatDate from "../../../lib/hooks/formatDate";
@@ -17,7 +16,7 @@ const ArticlePageSlug = () => {
     (async () => {
       try {
         setLoading(true);
-        const response = await fetch(`${backend_api}/${slug}`);
+        const response = await fetch(`/api/articles/${slug}`);
         const result = await response.json();
         setLoading(false);
         setArticle(result);

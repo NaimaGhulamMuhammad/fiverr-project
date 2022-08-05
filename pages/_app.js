@@ -1,21 +1,21 @@
-import "@ionic/react/css/core.css";
-import "@ionic/react/css/display.css";
-import "@ionic/react/css/flex-utils.css";
-import "@ionic/react/css/float-elements.css";
-import "@ionic/react/css/normalize.css";
-import "@ionic/react/css/padding.css";
-import "@ionic/react/css/structure.css";
-import "@ionic/react/css/text-alignment.css";
-import "@ionic/react/css/text-transformation.css";
-import "@ionic/react/css/typography.css";
 import Head from "next/head";
 import Script from "next/script";
-import "react-datepicker/dist/react-datepicker.css";
-import { BrowserRouter } from "react-router-dom";
-import { RecoilRoot } from "recoil";
 import "tailwindcss/tailwind.css";
+import "@ionic/react/css/core.css";
+import "@ionic/react/css/padding.css";
+import "@ionic/react/css/float-elements.css";
+import "@ionic/react/css/text-alignment.css";
+import "@ionic/react/css/text-transformation.css";
+import "@ionic/react/css/flex-utils.css";
+import "@ionic/react/css/display.css";
+import "@ionic/react/css/normalize.css";
+import "@ionic/react/css/structure.css";
+import "@ionic/react/css/typography.css";
+
 import "../styles/globals.css";
 import "../styles/variables.css";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -31,11 +31,9 @@ function MyApp({ Component, pageProps }) {
           content="#F58232"
         />
       </Head>
-      <RecoilRoot>
-
-          <Component {...pageProps} />
-
-      </RecoilRoot>
+      <div suppressHydrationWarning>
+        {typeof window === "undefined" ? null : <Component {...pageProps} />}
+      </div>
       <Script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></Script>
     </>
   );

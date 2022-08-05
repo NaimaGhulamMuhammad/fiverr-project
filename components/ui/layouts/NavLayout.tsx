@@ -3,15 +3,22 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const NavLayout = ({ children }: LayoutProps) => {
   const location = useLocation();
   const [selectedItem, setSelectedItem] = useState("/");
+  const [showNav, setShowNav] = useState(true);
+  const paths = ["/home", "/consult", "/packages", "/profile"];
 
   useEffect(() => {
     setSelectedItem(location.pathname);
+    if (paths.includes(location.pathname)) {
+      setShowNav(true);
+    } else {
+      setShowNav(false);
+    }
   }, [location.pathname]);
 
   const menuItems = [
@@ -37,12 +44,16 @@ const NavLayout = ({ children }: LayoutProps) => {
     },
   ];
 
-  return (
-    <div className="fixed bottom-0 z-40 w-full">
-      <NavigationMenu menuItems={menuItems} selectedItem={selectedItem} />
-      <div>{children}</div>
-    </div>
-  );
+  if (showNav) {
+    return (
+      <div className="fixed bottom-0 z-50 w-full">
+        <NavigationMenu menuItems={menuItems} selectedItem={selectedItem} />
+        <div>{children}</div>
+      </div>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default NavLayout;

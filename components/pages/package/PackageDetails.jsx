@@ -1,30 +1,60 @@
 import { useEffect, useState } from "react";
-import { PACKAGES } from "../../../lib/data";
 import PackDetails from "../../ui/packages/PackDetails";
 import { TopHeader } from "../../ui/layouts/Headers";
 import { useParams } from "react-router-dom";
 import { IonContent, IonPage } from "@ionic/react";
-import useNav from "../../../lib/hooks/useNav";
-
+import { ITEMS } from "../../../lib/data";
 const PackageDetails = () => {
   const [optionals, setOptionals] = useState([]);
   const [totalPrice, setTotalPrice] = useState(null);
   const [healthPackage, setHealthPackage] = useState(null);
   const params = useParams();
 
-  const { hideNav, showNav } = useNav();
-
-  useEffect(() => {
-    hideNav();
-    return () => {
-      showNav();
+  const getPackDetails = (packSlug) => {
+    const pack = ITEMS.filter((item) => item.type == "package").find(
+      (p) => p.slug == packSlug
+    );
+    const containedServices = pack.contains.filter(
+      (service) => service.isOptional == false
+    );
+    const serviceList = containedServices.map((service) => {
+      return ITEMS.find((item) => item.id == service.itemId);
+    });
+    const serviceListWithBenefits = serviceList.map((service) => {
+      const containedBenefits = service.contains.map((benefit) => {
+        return ITEMS.find((item) => item.id == benefit.itemId);
+      });
+      return {
+        ...service,
+        benefits: containedBenefits,
+      };
+    });
+    const containedOptServices = pack.contains.filter(
+      (service) => service.isOptional == true
+    );
+    const optServiceList = containedOptServices.map((service) => {
+      return ITEMS.find((item) => item.id == service.itemId);
+    });
+    const optServiceListWithBenefits = optServiceList.map((service) => {
+      const containedBenefits = service.contains.map((benefit) => {
+        return ITEMS.find((item) => item.id == benefit.itemId);
+      });
+      return {
+        ...service,
+        benefits: containedBenefits,
+      };
+    });
+    return {
+      ...pack,
+      services: serviceListWithBenefits,
+      optionalServices: optServiceListWithBenefits,
     };
-  }, []);
+  };
 
   useEffect(() => {
-    const healthPackage = PACKAGES.find((p) => p.routeName === params.id);
+    const healthPackage = getPackDetails(params.id);
     setHealthPackage(healthPackage);
-  }, [healthPackage, params]);
+  }, [params]);
 
   const handleOptional = (optional) => {
     if (optionals.includes(optional)) {

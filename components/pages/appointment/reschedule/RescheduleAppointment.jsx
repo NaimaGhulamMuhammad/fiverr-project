@@ -5,7 +5,6 @@ import { TopHeader } from "../../../ui/layouts/Headers";
 import Container from "../../../ui/layouts/Container";
 import DoctorSlots from "../../../ui/book-appointment/DoctorSlots";
 import { DOCTORS } from "../../../../lib/data";
-import useNav from "../../../../lib/hooks/useNav";
 
 const RescheduleAppointment = () => {
   const SampleData = [
@@ -30,14 +29,6 @@ const RescheduleAppointment = () => {
   const params = useParams();
   const [appointment, setAppointment] = useState();
   const [doctor, setDoctor] = useState();
-  const { hideNav, showNav } = useNav();
-
-  useEffect(() => {
-    hideNav();
-    return () => {
-      showNav();
-    };
-  }, []);
 
   useEffect(() => {
     const appointmentId = params.id;

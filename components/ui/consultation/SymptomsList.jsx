@@ -55,7 +55,7 @@ const SymptomsList = () => {
           <ConsultCircle
             name={symptom.name}
             icon={symptom.icon}
-            route={symptom.route}
+            href={symptom.route}
             key={idx}
           />
         ))}

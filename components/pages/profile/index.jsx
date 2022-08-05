@@ -1,8 +1,8 @@
-import ProfileBox from "../../ui/profile-management/profile-box";
-import ProfileMenus from "../../ui/profile-management/profile-menus";
+import ProfileMenus from "../../ui/profile-management/ProfileMenus";
 import { TopHeader } from "../../ui/layouts/Headers";
 import Container from "../../ui/layouts/Container";
 import { IonContent, IonPage } from "@ionic/react";
+import ProfileBox from "../../ui/profile-management/ProfileBox";
 
 const Profile = () => {
   const subMenuItems1 = [
@@ -12,19 +12,9 @@ const Profile = () => {
       image: "appointment.png",
     },
     {
-      name: "Prescriptions",
-      link: "prescriptions",
+      name: "My Orders",
+      link: "orders",
       image: "drug.png",
-    },
-    {
-      name: "Consultations",
-      link: "consultations",
-      image: "consultation.png",
-    },
-    {
-      name: "Lab Results",
-      link: "lab-results",
-      image: "lab.png",
     },
     {
       name: "Medical Records",
@@ -60,9 +50,9 @@ const Profile = () => {
     <IonPage>
       <TopHeader pageName={"Profile"} />
       <IonContent>
-        <Container>
+        <Container mainPage>
           <div className="flex flex-col mx-auto">
-            <ProfileBox />
+            <ProfileBox percentage={60} />
             <ProfileMenus subMenuItems={subMenuItems1} />
             <ProfileMenus subMenuItems={subMenuItems2} />
           </div>

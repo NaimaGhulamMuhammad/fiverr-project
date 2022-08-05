@@ -1,22 +1,29 @@
-import { SubHeadingText } from "../../core/Text";
+import { useHistory } from "react-router-dom";
+import Disclaimer from "../../../pages/doctors/disclaimer/Disclaimer";
+import AppointmentDisclaimerModal from "../../core/modals/AppointmentDisclaimer";
 import DoctorCard from "./DoctorCard";
-import { DOCTORS } from "../../../../lib/data";
 
-const DoctorsList = ({ mode, specialty }) => {
+const DoctorsList = ({ doctors }) => {
+  const history = useHistory();
+
   return (
-    <div>
-      <SubHeadingText>Doctors for you</SubHeadingText>
-      <div>
-        {specialty === "All" && mode === "All"
-          ? DOCTORS.map((doctor) => (
-              <DoctorCard key={doctor.id} doctor={doctor} />
-            ))
-          : DOCTORS.filter(
-              (doctor) =>
-                doctor.mode.includes(mode) &&
-                (doctor.speciality === specialty || specialty === "All")
-            ).map((doctor) => <DoctorCard key={doctor.id} doctor={doctor} />)}
-      </div>
+    <div className="w-full h-96">
+      {doctors.length === 0 ? (
+        <div className="h-full flex w-full justify-center items-center text-center text-primary-100">
+          No doctors found for your search.
+        </div>
+      ) : (
+        <div className="pb-2 flex flex-col gap-2">
+          {doctors.map((doctor) => (
+            <DoctorCard key={doctor.id} doctor={doctor} />
+          ))}
+        </div>
+      )}
+      <AppointmentDisclaimerModal>
+        <Disclaimer
+          afterBookingAppointment={() => history.push("/pre-appointment")}
+        />
+      </AppointmentDisclaimerModal>
     </div>
   );
 };

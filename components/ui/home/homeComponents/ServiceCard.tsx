@@ -12,7 +12,7 @@ interface ServiceProps {
 const ServiceCard = ({ service }: ServiceProps) => {
   return (
     <Link to="/">
-      <div className="flex flex-col mr-3 items-center cursor-pointer w-40 flex-none rounded-2xl font-general bg-white drop-shadow-md">
+      <div className="flex flex-col mr-3 items-center cursor-pointer w-40 flex-none rounded-2xl font-general bg-white drop-shadow-md h-full">
         <div className="h-24 w-full rounded-t-2xl flex items-center justify-center relative bg-tertiary-50">
           <span className="absolute rounded-full bg-white shadow p-1.5">
             <img src={service.icon} alt="icon" className="h-14" />

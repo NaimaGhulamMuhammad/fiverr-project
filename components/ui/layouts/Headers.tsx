@@ -8,6 +8,8 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { createOutline } from "ionicons/icons";
+import { useRouter } from "next/router";
+import { VscChromeClose } from "react-icons/vsc";
 
 interface EditHeaderProps {
   pageName: string;
@@ -59,7 +61,7 @@ export const EditHeader = ({
 
 export const TopHeader = ({ pageName, back, home }: TopHeaderProps) => {
   return (
-    <IonHeader className="rounded-b-lg">
+    <IonHeader className="ion-no-border">
       <IonToolbar
         className={`${home ? "toolbar-background-home" : "toolbar-background"}`}
       >
@@ -69,6 +71,22 @@ export const TopHeader = ({ pageName, back, home }: TopHeaderProps) => {
           </IonButtons>
         )}
         <IonTitle className="text-lg font-semibold">{pageName}</IonTitle>
+      </IonToolbar>
+    </IonHeader>
+  );
+};
+
+export const BlankHeader = ({}) => {
+  const router = useRouter();
+  return (
+    <IonHeader className="ion-no-border">
+      <IonToolbar className={"bg-white px-2 w-full"}>
+        <div
+          className="text-xl text-primary-100 float-right"
+          onClick={() => router.back()}
+        >
+          <VscChromeClose size="24px" />
+        </div>
       </IonToolbar>
     </IonHeader>
   );

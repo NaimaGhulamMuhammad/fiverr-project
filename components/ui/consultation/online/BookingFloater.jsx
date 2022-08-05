@@ -11,7 +11,7 @@ const BookingFloater = () => {
           View
         </FadedSmallText>
       </div>
-      <Button>Pay and book</Button>
+      <Button href="/video-call-preview">Pay and book</Button>
     </Floater>
   );
 };

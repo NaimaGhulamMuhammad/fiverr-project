@@ -13,8 +13,8 @@ interface NavigationMenuProps {
 
 const NavigationMenu = ({ menuItems, selectedItem }: NavigationMenuProps) => {
   return (
-    <div className="px-4 pb-6 pt-2 drop-shadow-md border-t border-gray-300 bg-white">
-      <div className="flex justify-around">
+    <div className="pb-5 drop-shadow-md border-t border-gray-300 bg-white">
+      <div className="flex justify-between">
         {menuItems.map((item: ItemProps, idx) => (
           <MenuItem
             name={item.name}

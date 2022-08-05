@@ -56,6 +56,10 @@ module.exports = {
       minHeight: {
         48: "192px",
       },
+      height: {
+        "screen-80": "80vh",
+        "screen-90": "90vh",
+      },
       borderRadius: {
         sm: "0.125rem",
         DEFAULT: "0.25rem",

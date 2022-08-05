@@ -22,7 +22,7 @@ import {
 
 const AppointmentCard = ({ appointment }) => {
   return (
-    <Link to="/">
+    <Link to="/landing-video-call">
       <div className="flex flex-col mr-3 p-4 items-center justify-between cursor-pointer w-72 flex-none border rounded-2xl font-general bg-tertiary-100">
         <div className="w-full flex mb-4 items-center">
           <div className="bg-white/40 shadow-sm h-max p-4 rounded-2xl flex items-center justify-center">

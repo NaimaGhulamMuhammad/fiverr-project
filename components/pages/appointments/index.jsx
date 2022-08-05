@@ -18,39 +18,54 @@ const Appointments = () => {
     setAppointments(APPOINTMENTS);
   });
 
+  //group the appointments by status
+  const Appointments = appointments.reduce(
+    (acc, appointment) => {
+      if (appointment.status === "confirmed") {
+        acc.confirmed.push(appointment);
+      } else if (appointment.status === "completed") {
+        acc.completed.push(appointment);
+      } else if (appointment.status === "cancelled") {
+        acc.cancelled.push(appointment);
+      }
+      return acc;
+    },
+    { confirmed: [], completed: [], cancelled: [] }
+  );
+
   const tabToRender = () => {
     if (selectedTab === 0) {
-      if (appointments.length === 0) {
+      if (Appointments.confirmed.length === 0) {
         {
           return <UpcomingStatus status="No Upcoming Appointments" />;
         }
       } else {
         {
-          return appointments.map((appointment) => (
+          return Appointments.confirmed.map((appointment) => (
             <AppointmentCard key={appointment.id} appointment={appointment} />
           ));
         }
       }
     } else if (selectedTab === 1) {
-      if (appointments.length === 0) {
+      if (appointments.completed?.length === 0) {
         {
           return <CompletedStatus status="No Completed Appointments" />;
         }
       } else {
         {
-          return appointments.map((appointment) => (
+          return Appointments.completed.map((appointment) => (
             <AppointmentCard key={appointment.id} appointment={appointment} />
           ));
         }
       }
     } else {
-      if (appointments.length === 0) {
+      if (appointments.cancelled?.length === 0) {
         {
           return <CancelledStatus status="No Cancelled/Missed Appointments" />;
         }
       } else {
         {
-          return appointments.map((appointment) => (
+          return Appointments.cancelled.map((appointment) => (
             <AppointmentCard key={appointment.id} appointment={appointment} />
           ));
         }

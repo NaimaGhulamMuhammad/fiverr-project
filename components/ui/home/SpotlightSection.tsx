@@ -13,7 +13,6 @@ const SpotlightSection = () => {
       const discPacks = packages.filter((pack, idx) => {
         return idx < 2;
       });
-      console.log(discPacks);
       setDiscountedPackages(discPacks);
     }
   }, [packages]);

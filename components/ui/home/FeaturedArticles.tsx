@@ -3,15 +3,13 @@ import ArticleCard from "../articles/ArticleCard";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-import { backend_api } from "../../../lib/constants/routes_constants";
-
 const FeaturedArticles = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(`${backend_api}`);
+        const response = await fetch("/api/articles");
         const result = await response.json();
         setArticles(result);
       } catch (err) {

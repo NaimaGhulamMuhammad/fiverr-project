@@ -2,7 +2,7 @@ import { TopHeader } from "../../ui/layouts/Headers";
 import Container from "../../ui/layouts/Container";
 import { IonContent, IonPage } from "@ionic/react";
 
-import SettingsMenus from "../../ui/profile-management/settings-menu";
+import SettingsMenus from "../../ui/profile-management/SettingsMenu";
 
 const Settings = () => {
   const SettingsMenuItems = [

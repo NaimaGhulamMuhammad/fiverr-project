@@ -1,24 +1,19 @@
+import useModal from "../../../lib/hooks/useModal";
 import { Button } from "../core/Buttons";
 import Floater from "../core/Floater";
-import Link from "react-router-dom";
+
 interface FloaterButtonProps {
   appointmentId: string;
-  isCancelled: boolean;
-  isCompleted: boolean;
-  openModal: () => void;
+  status: string;
 }
 
-const FloaterButton = ({
-  appointmentId,
-  isCancelled,
-  isCompleted,
-  openModal,
-}: FloaterButtonProps) => {
+const FloaterButton = ({ appointmentId, status }: FloaterButtonProps) => {
+  const { setModal } = useModal();
   return (
     <>
-      {isCancelled ? (
+      {status === "cancelled" ? (
         <div> </div>
-      ) : isCompleted ? (
+      ) : status === "completed" ? (
         <Floater classes="flex flex-row items-center justify-between mt-4">
           <Button
             classes="w-full font-semibold py-2 px-4 rounded"
@@ -31,7 +26,7 @@ const FloaterButton = ({
         <Floater classes="flex flex-row items-center justify-between mt-4">
           <Button
             classes="w-full font-semibold py-2 px-4 rounded mr-2"
-            handleClick={openModal}
+            handleClick={() => setModal("cancel-appointment")}
           >
             Cancel
           </Button>
@@ -39,6 +34,7 @@ const FloaterButton = ({
             href={`/appointment/reschedule/${appointmentId}`}
             classes="w-full font-semibold py-2 px-4 rounded ml-2"
             primary={true}
+            full={true}
             handleClick={() => console.log("Confirm Reschedule")}
           >
             Reschedule
