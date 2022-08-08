@@ -1,22 +1,47 @@
 import { Link } from "react-router-dom";
-import { FadedSmallText } from "../core/Text";
+import { FadedSmallText, SmallText } from "../core/Text";
 
 interface CategoryCircleProps {
   name: string;
   icon: string;
   href: string;
+  isActive: boolean;
 }
 
-const CategoryCircle = ({ name, icon, href }: CategoryCircleProps) => {
+const CategoryCircle = ({
+  name,
+  icon,
+  href,
+  isActive,
+}: CategoryCircleProps) => {
   return (
-    <Link to={href}>
-      <div className="flex flex-col items-center">
-        <div className="rounded-full border border-gray-300 p-2.5 drop-shadow-md bg-white">
-          <img src={icon} width={25} height={25} alt="myhc" />
-        </div>
-        <FadedSmallText classes={"text-center mt-2"}>{name}</FadedSmallText>
-      </div>
-    </Link>
+    <>
+      {isActive ? (
+        <Link to={href}>
+          <div className="flex flex-col items-center">
+            <div className="rounded-full border border-gray-300 p-2.5 drop-shadow-md bg-primary-100">
+              <img
+                className="invert"
+                src={icon}
+                width={25}
+                height={25}
+                alt="myhc"
+              />
+            </div>
+            <SmallText classes={"text-center mt-2"}>{name}</SmallText>
+          </div>
+        </Link>
+      ) : (
+        <Link to={href}>
+          <div className="flex flex-col items-center">
+            <div className="rounded-full border border-gray-300 p-2.5 drop-shadow-md bg-white">
+              <img src={icon} width={25} height={25} alt="myhc" />
+            </div>
+            <FadedSmallText classes={"text-center mt-2"}>{name}</FadedSmallText>
+          </div>
+        </Link>
+      )}
+    </>
   );
 };
 

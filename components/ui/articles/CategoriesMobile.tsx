@@ -7,7 +7,7 @@ import { Button } from "../core/Buttons";
 import formatTitle from "../../../lib/hooks/formatTitle";
 import SeeArticleCategories from "../core/modals/SeeArticleCategories";
 import { useLocation } from "react-router-dom";
-import { getCategoryFromUrl } from "../../../utils/route";
+import { getCategoryFromUrl } from "../../../utils/route.js";
 
 const CategoriesMobile = () => {
   const { openModal, setModal, closeModal } = useModal();
@@ -28,6 +28,7 @@ const CategoriesMobile = () => {
             name={formatTitle(categoryName.name)}
             icon={categoryName.icon}
             href={categoryName.route}
+            isActive={isActive(categoryName.route)}
           />
         ))}
       </div>

@@ -1,7 +1,6 @@
 import { IonCol } from "@ionic/react";
 import { Link } from "react-router-dom";
-import { FadedSmallText } from "../core/Text";
-import { useParams } from "react-router-dom";
+import { FadedSmallText, SmallText } from "../core/Text";
 
 interface CategoriesCircleProps {
   icon: string;
@@ -20,17 +19,28 @@ const AllCategoriesCircleItems = ({
   isActive,
 }: CategoriesCircleProps) => {
   return (
-    <IonCol
-      size="4"
-      onClick={closeModal}
-      className={isActive ? "border-2 border-orange-500" : ""}
-    >
-      <Link to={href} className="flex flex-col items-center mb-2">
-        <div className="p-2 bg-slate-50 rounded-full mb-2">
-          <img src={icon} width={25} height={25} alt="myhc" />
-        </div>
-        <FadedSmallText classes="text-center">{name}</FadedSmallText>
-      </Link>
+    <IonCol size="4" onClick={closeModal}>
+      {isActive ? (
+        <Link to={href} className="flex flex-col items-center mb-2">
+          <div className="p-2 bg-primary-100 rounded-full mb-2 border border-gray-300">
+            <img
+              className="invert"
+              src={icon}
+              width={25}
+              height={25}
+              alt="myhc"
+            />
+          </div>
+          <SmallText classes="text-center">{name}</SmallText>
+        </Link>
+      ) : (
+        <Link to={href} className="flex flex-col items-center mb-2">
+          <div className="p-2 bg-slate-50 rounded-full mb-2">
+            <img src={icon} width={25} height={25} alt="myhc" />
+          </div>
+          <FadedSmallText classes="text-center">{name}</FadedSmallText>
+        </Link>
+      )}
     </IonCol>
   );
 };
