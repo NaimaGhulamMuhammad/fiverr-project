@@ -14,9 +14,10 @@ const CategoriesMobile = () => {
   const { pathname: params } = useLocation();
 
   const isActive = (category: string) => {
-    const last = getCategoryFromUrl(category);
-    const current = getCategoryFromUrl(params);
-    return last === current;
+//     const last = getCategoryFromUrl(category);
+//     const current = getCategoryFromUrl(params);
+//     return last === current;
+      return params == category;
   };
 
   return (
