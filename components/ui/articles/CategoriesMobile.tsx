@@ -19,7 +19,7 @@ const CategoriesMobile = () => {
 //     const last = getCategoryFromUrl(category);
 //     const current = getCategoryFromUrl(params);
 //     return last === current;
-      return router.asPath == category;
+      return params == category;
   };
 
   return (
