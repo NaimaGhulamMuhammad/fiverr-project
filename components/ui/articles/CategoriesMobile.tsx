@@ -7,19 +7,13 @@ import { Button } from "../core/Buttons";
 import formatTitle from "../../../lib/hooks/formatTitle";
 import SeeArticleCategories from "../core/modals/SeeArticleCategories";
 import { useLocation } from "react-router-dom";
-import { useRouter } from "next/router";
-import { getCategoryFromUrl } from "../../../utils/route.js";
 
 const CategoriesMobile = () => {
   const { openModal, setModal, closeModal } = useModal();
   const { pathname: params } = useLocation();
-  const router = useRouter();
 
   const isActive = (category: string) => {
-//     const last = getCategoryFromUrl(category);
-//     const current = getCategoryFromUrl(params);
-//     return last === current;
-      return router.asPath == category;
+    return params == category;
   };
 
   return (
